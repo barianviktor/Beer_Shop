@@ -1,0 +1,74 @@
+<h1>Headline(H1)</h1>
+<h2>Headline (H2)</h2>
+<h3>Headline (H3)</h3>
+<h4>Headline (H4)</h4>
+<h5>Headline (H5)</h5>
+<p class="text-standard">Copy Text standard</p>
+<p class="text-semi-bold">Copy Text semi bold</p>
+<p class="text-uppercase">Copy Text uppercase</p>
+<a [routerLink]="['']" class="text-standard-link">Copy Text standard link</a>
+<p class="text-caption">Caption</p>
+<a [routerLink]="['']" class="text-caption-link">Caption link</a>
+<p class="text-caption-bold">Caption bold</p>
+<p class="text-button-label">Button label</p>
+<p class="text-caption-small">Caption small</p>
+<p class="text-caption-small-bold">Caption small bold</p>
+<app-primary-button></app-primary-button>
+<app-secondary-button></app-secondary-button>
+<app-text-button></app-text-button>
+<app-icon-only-button></app-icon-only-button>
+<app-menu-item-text></app-menu-item-text>
+<app-menu-item-icon></app-menu-item-icon>
+<app-sale-badge></app-sale-badge>
+<app-sold-out-badge></app-sold-out-badge>
+<app-new-badge></app-new-badge>
+<app-product-of-the-week-badge></app-product-of-the-week-badge>
+<app-filter-tag></app-filter-tag>
+<app-breadcrumbs></app-breadcrumbs>
+<div>
+  <a class="link" [routerLink]="['/']">Link</a>
+</div>
+<app-custom-text-input
+  placeholder="Placeholder Text"
+  label="Label"
+  width="400px"
+></app-custom-text-input>
+<app-custom-checkbox-input></app-custom-checkbox-input>
+<app-custom-searchbar-input></app-custom-searchbar-input>
+
+<div *ngIf="beer$ | async as beer">
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    id<strong> {{ beer.id }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    image_url<strong> {{ beer.image_url }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    name<strong> {{ beer.name }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    contributed_by<strong> {{ beer.contributed_by }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    description<strong> {{ beer.description }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    price<strong> {{ beer.price }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    description<strong> {{ beer.description }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    content<strong> {{ beer.content }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    badges<strong> {{ beer.badges | json }}</strong>
+  </p>
+  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+    onSale<strong> {{ beer.onSale }}</strong>
+  </p>
+</div>
+<pre>
+
+  {{ beerSearchCard$ | async | json }}
+</pre>

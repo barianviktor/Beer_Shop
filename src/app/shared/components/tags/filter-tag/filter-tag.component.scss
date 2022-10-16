@@ -1,0 +1,40 @@
+@use '../../../../../assets/styles' as *;
+.tag{
+   /*  @include inline-flex-everything-centered; */
+    white-space: nowrap;
+    background-color: $greyscale-white;
+    border: 1px solid $greyscale-black;
+    color: $greyscale-black;
+    min-width: 120px;
+    height: 40px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    outline: none;
+}
+.tag:hover{
+    border: 1px solid $primary-turquoise-dark;
+    color: $primary-turquoise-dark;
+}
+.tag:focus{
+    padding: 0 15px;
+
+    border: 2px solid $accent-orange;
+    color: $primary-turquoise-dark;
+}
+div{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+img{
+    width: 16px;
+    height: 16px;
+}
+p{
+    margin-right: 8px;
+    /* padding: 8px 8px 8px ; */
+}

@@ -1,0 +1,67 @@
+@use "../../../../../assets/styles/" as *;
+
+.input-container{
+    
+    display: flex;
+    flex-direction: column;
+}
+label{
+    color: $greyscale-black;
+}
+input{
+    border: 1px solid $greyscale-dark-grey;
+    background-color: $greyscale-white;
+    border-radius: 4px;
+    padding: 8px 16px;
+    outline: none;
+    color: $greyscale-black;
+
+}
+input::placeholder{
+    color: $greyscale-dark-grey;
+
+}
+input:hover{
+    border: 1px solid $greyscale-black;
+
+}
+input:focus{
+    padding: 7px 15px;
+    border: 2px solid $accent-orange;
+}
+input:disabled{
+    background-color:$greyscale-light-grey ;
+    border: 1px solid $greyscale-dark-grey ;
+    color: $greyscale-dark-grey;
+}
+
+.input-error{
+    
+    color: $functional-warning-error !important;
+    border: 1px solid $functional-warning-error !important;
+    padding: 8px 16px !important;
+}
+.input-error::placeholder{
+    color: $functional-warning-error !important;
+
+}
+.error-container{
+    width: 100%;
+}
+.error-item{
+    margin: 4px;
+    p{
+        @include text-caption-small;
+
+    }
+    img{
+        width: 15px;
+        margin-right: 4px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    color: $functional-warning-error;
+
+}

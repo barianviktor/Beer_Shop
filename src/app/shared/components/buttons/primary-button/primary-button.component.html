@@ -1,0 +1,10 @@
+<button
+  [ngStyle]="{ width: width, borderRadius: borderRadius }"
+  (click)="handleClick()"
+  [disabled]="disabled"
+>
+  <div>
+    <img [src]="icon_path" alt="button-icon" />
+    <span>{{ text }}</span>
+  </div>
+</button>

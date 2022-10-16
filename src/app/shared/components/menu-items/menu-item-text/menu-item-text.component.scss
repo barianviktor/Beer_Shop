@@ -1,0 +1,36 @@
+@use '../../../../../assets/styles' as *;
+
+div{
+    @include inline-flex-everything-centered;
+    background-color: $greyscale-white;
+    color: $greyscale-black;
+    cursor: pointer;
+    min-width: 104px;
+    height: 40px;
+    white-space: nowrap;
+
+    border: 2px solid $greyscale-white;
+    outline: none;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px;
+    text-transform: uppercase;
+
+}
+div:hover{
+    border-bottom: 2px solid $primary-turquoise-dark;
+    color: $primary-turquoise-dark;
+
+}
+div:focus{
+    color: $primary-turquoise-dark;
+    border: 2px solid $accent-orange;
+}
+div:active{
+    border-left: 2px solid $greyscale-white;
+    border-top: 2px solid $greyscale-white;
+    border-right: 2px solid $greyscale-white;
+    border-bottom: 2px solid $primary-turquoise-dark;
+    color: $greyscale-black;
+}

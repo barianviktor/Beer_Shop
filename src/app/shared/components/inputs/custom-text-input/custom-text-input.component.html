@@ -1,0 +1,20 @@
+<div [ngStyle]="{ width: width }" class="input-container">
+  <label for="">{{ label }}</label>
+  <input
+    [formControl]="control"
+    [class.input-error]="control.touched && control.invalid"
+    [disabled]="disabled"
+    [type]="type"
+    [placeholder]="placeholder"
+  />
+  <div *ngIf="control.touched && control.invalid" class="error-container">
+    <div *ngIf="control.hasError('email')" class="error-item">
+      <img src="assets/icons/danger.svg" alt="danger-icon" />
+      <p>Bitte geben Sie eine korrekte E-Mail Adresse ein</p>
+    </div>
+    <div *ngIf="control.hasError('required')" class="error-item">
+      <img src="assets/icons/danger.svg" alt="danger-icon" />
+      <p>Required field</p>
+    </div>
+  </div>
+</div>

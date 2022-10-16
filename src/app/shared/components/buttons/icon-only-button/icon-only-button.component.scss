@@ -1,0 +1,30 @@
+@use '../../../../../assets/styles' as *;
+
+button{
+    @include flex-everything-centered;
+    height: 40px;
+    background-color: $greyscale-white;;
+    color: $greyscale-black;
+
+    outline: none;
+    cursor: pointer;
+    border: 2px solid $greyscale-white;
+}
+img{
+    width: 22px;
+    
+}
+button:hover{
+    background-color: $primary-turquoise-light;
+    color: $primary-turquoise-dark;
+
+}
+button:focus{
+    border: 2px solid $accent-orange;
+    background-color: $primary-turquoise-light;
+    color: $primary-turquoise-dark;
+}
+
+button:disabled{
+    color: $greyscale-dark-grey;
+}

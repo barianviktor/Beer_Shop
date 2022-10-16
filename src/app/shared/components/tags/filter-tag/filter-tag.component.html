@@ -1,0 +1,11 @@
+<div
+  (click)="onClick()"
+  class="tag"
+  tabindex="0"
+  [ngStyle]="{ width: width, borderRadius: borderRadius }"
+>
+  <div>
+    <p>{{ text }}</p>
+    <img [src]="icon_path" alt="filter-tag-icon" />
+  </div>
+</div>

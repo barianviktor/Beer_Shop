@@ -1,0 +1,59 @@
+@use "../../../../../assets/styles/" as *;
+
+.searchbar-container{
+    outline: none;
+    height: 40px;
+    border: 1px solid $greyscale-dark-grey;
+    display: flex;
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 200px;
+}
+.searchbar-container:hover{
+    border: 1px solid $greyscale-black;
+}
+.searchbar-container:focus{
+    border: 1px solid  $accent-orange;
+    
+}
+.searchbar-container:active{
+    border: 1px solid $greyscale-dark-grey;
+
+}
+.icon{
+    background-image: url("/assets/icons/search.svg");
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+button{
+    @include flex-everything-centered;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    outline: none;
+    border-radius: 0px;
+    border: none;
+    background-color: $primary-turquoise;
+    cursor: pointer;
+}
+input{
+    outline: none;
+    border-radius: 0px;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 8px 16px;
+}
+input::placeholder{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: $greyscale-dark-grey;
+}
+.searchbar-container:has(input:focus)  {
+    border: 1px solid  $accent-orange;
+
+}

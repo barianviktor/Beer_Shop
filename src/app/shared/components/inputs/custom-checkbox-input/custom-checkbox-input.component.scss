@@ -1,0 +1,43 @@
+@use "../../../../../assets/styles/" as *;
+
+ input{
+    /* opacity: 0;
+    position: absolute;
+    top: 20%;
+    left: 20% */
+    display: none
+   
+}
+ .checkbox-container{
+    @include text-uppercase;
+    position: relative;
+    width: fit-content;
+    outline: none;
+}
+label{
+    display: flex;
+    cursor: pointer;
+
+}
+label::before{
+    content: "";
+    @include flex-everything-centered; 
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    background-color: $greyscale-white;
+    border: 1px solid $greyscale-black;
+    margin-right:  8px;
+
+}
+
+input:checked +  label::before{
+    content: url("/assets/icons/check.svg");
+}
+.checkbox-container:hover label::before{
+    border: 1px solid $primary-turquoise;
+
+}
+.checkbox-container:focus label::before{
+    border: 2px solid $accent-orange;
+}

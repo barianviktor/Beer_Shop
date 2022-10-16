@@ -1,0 +1,37 @@
+@use  "../../../assets/styles/" as *;
+
+*{
+    display: block;
+    margin: 15px 55px
+}
+
+.text-standard{
+    @include text-standard;
+}
+.text-semi-bold{
+    @include text-semi-bold
+}
+.text-uppercase{
+    @include text-uppercase
+}
+.text-standard-link{
+    @include text-standard-link
+}
+.text-caption{
+    @include text-caption
+}
+.text-caption-link{
+    @include text-caption-link
+}
+.text-caption-bold{
+    @include text-caption-bold
+}
+.text-button-label{
+    @include button-label
+}
+.text-caption-small{
+    @include text-caption-small
+}
+.text-caption-small-bold{
+    @include text-caption-small-bold
+}

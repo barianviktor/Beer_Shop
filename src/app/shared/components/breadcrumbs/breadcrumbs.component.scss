@@ -1,0 +1,26 @@
+@use '../../../../assets/styles' as *;
+
+a{
+    @include inline-flex-everything-centered;
+    color: $greyscale-black;
+    cursor: pointer;
+    height: 28px;
+    border: 2px solid $greyscale-white;
+    outline: none
+}
+p{
+    @include text-caption;
+
+    margin-right: 4px;
+}
+a:active p{
+    @include text-caption-bold;
+}
+a:hover{
+    text-decoration: underline;
+}
+a:focus{
+    border:2px solid $accent-orange;
+    text-decoration: underline;
+
+}

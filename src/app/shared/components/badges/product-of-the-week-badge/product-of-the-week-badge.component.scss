@@ -1,0 +1,14 @@
+@use '../../../../../assets/styles' as *;
+.badge{
+    @include inline-flex-everything-centered;
+    @include text-caption-small-bold;
+    background-color: $greyscale-white;
+    border: 1px solid $greyscale-black;
+    color: $greyscale-black;
+    min-width: 45px;
+    height: 25px;
+    padding: 1px 11px;
+    cursor: default;
+    white-space: nowrap;
+
+}

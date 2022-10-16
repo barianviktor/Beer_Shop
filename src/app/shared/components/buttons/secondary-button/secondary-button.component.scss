@@ -1,0 +1,34 @@
+@use '../../../../../assets/styles' as *;
+
+button{
+    @include button-label;
+    @include inline-flex-everything-centered;
+    white-space: nowrap;
+
+    height: 40px;
+    min-width: 152px;
+    outline: none;
+    border: 1px solid $primary-turquoise;
+    color: $primary-turquoise;
+    background-color: $greyscale-white;
+    cursor: pointer;
+    padding: 0 24px;
+    font-weight: 900 !important;
+
+}
+
+button:hover{
+    padding: 0 22px;
+    border: 2px solid $primary-turquoise-dark;
+    color: $primary-turquoise-dark;
+}
+button:focus{
+    padding: 0 22px;
+    border: 2px solid $accent-orange;
+    color: $primary-turquoise-dark;
+}
+button:disabled{
+
+    border: 1px solid $greyscale-dark-grey;
+    color: $greyscale-dark-grey;
+}

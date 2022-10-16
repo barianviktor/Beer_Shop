@@ -1,0 +1,37 @@
+@use '../../../../../assets/styles' as *;
+
+div{
+    white-space: nowrap;
+
+    img{
+        width: 24px;
+        height: 24px;
+    }
+    p{
+        @include text-caption-small;
+        text-align: center
+
+    }
+    @include inline-flex-everything-centered;
+    flex-direction: column;
+    background-color: $greyscale-white;
+    color: $greyscale-black;
+    cursor: pointer;
+    min-width: 64px;
+    height: 44px;
+    border: 2px solid $greyscale-white;
+    outline: none;
+}
+
+div:hover{
+    color: $primary-turquoise-dark;
+
+}
+div:focus{
+    color: $primary-turquoise-dark;
+    border: 2px solid $accent-orange;
+}
+div:active{
+    color: $primary-turquoise-dark;
+    border: 2px solid $greyscale-white;
+}
