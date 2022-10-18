@@ -11,12 +11,12 @@ import { ISavedBeer } from 'src/app/interfaces/savedBeer.interface';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
-  cart$: Observable<IBeer[]>;
+  cartItems$: Observable<IBeer[]>;
   constructor(
     private cartService: CartService,
     private beerService: BeerService
   ) {
-    this.cart$ = this.cartService.shoppingCart$.pipe(
+    this.cartItems$ = this.cartService.shoppingCart$.pipe(
       switchMap((savedBeers: ISavedBeer[]) => {
         let ids: number[] = [];
         savedBeers.forEach((beer: ISavedBeer) => {
@@ -28,4 +28,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onDecrementQuantity(id: number) {
+    console.log('decre');
+
+    this.cartService.decreaseQuantity(id);
+  }
+  onIncrementQuantity(id: number) {
+    this.cartService.increaseQuantity(id);
+  }
 }

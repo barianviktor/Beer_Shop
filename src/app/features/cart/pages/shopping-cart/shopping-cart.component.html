@@ -1,2 +1,8 @@
-<p>shopping-cart works!</p>
-{{ cart$ | async | json }}
+<div>
+  <app-cart-item
+    *ngFor="let item of cartItems$ | async"
+    [item]="item"
+    (increaseQuantity)="onIncrementQuantity($event)"
+    (decreaseQuantity)="onDecrementQuantity($event)"
+  ></app-cart-item>
+</div>

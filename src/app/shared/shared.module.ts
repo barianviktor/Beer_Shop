@@ -21,6 +21,7 @@ import { CustomSearchbarInputComponent } from './components/inputs/custom-search
 import { SearchItemCardComponent } from './components/cards/search-item-card/search-item-card.component';
 import { PercentOffBadgeComponent } from './components/badges/percent-off-badge/percent-off-badge.component';
 import { OnlyIconComponent } from './components/only-icon/only-icon.component';
+import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-input/custom-spinner-input.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { OnlyIconComponent } from './components/only-icon/only-icon.component';
     SearchItemCardComponent,
     PercentOffBadgeComponent,
     OnlyIconComponent,
+    CustomSpinnerInputComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -63,6 +65,7 @@ import { OnlyIconComponent } from './components/only-icon/only-icon.component';
     CustomSearchbarInputComponent,
     SearchItemCardComponent,
     PercentOffBadgeComponent,
+    CustomSpinnerInputComponent,
   ],
 })
 export class SharedModule {}

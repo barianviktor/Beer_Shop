@@ -44,6 +44,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: #F2F2F2;
+
 }
 .image-container img {
     height: 90%;
@@ -73,6 +75,10 @@ app-primary-button {
     @include text-caption;
     color: $greyscale-dark-grey;
     height: 25px;
+}
+a {
+    text-decoration: none;
+    color: $greyscale-black;
 }
 .content-container span:nth-child(1){
     color: $greyscale-black;

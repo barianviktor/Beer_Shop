@@ -1,0 +1,58 @@
+@use '../../../../../assets/styles/' as *;
+
+.cart-item-container{
+    width: 100%;
+}
+.items-row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: red;
+    .product-container{
+        @include flex-everything-centered;
+        grid-column: 1 / 4;
+        background-color: blue;
+    }
+    .contributor-container{
+        @include flex-everything-centered;
+
+        grid-column: 4 / 6;
+        background-color: green;
+    }
+    .price-container{
+        @include flex-everything-centered;
+        grid-column: 6 / 8;
+        background-color: yellow;
+
+    }
+    .quantity-container{
+        @include flex-everything-centered;
+
+        grid-column: 8 / 11;
+        background-color: orange;
+    }
+    .subtotal-container{
+        @include flex-everything-centered;
+
+        grid-column: 11 / 13;
+        background-color: purple;
+    }
+}
+.price-text{
+    @include text-bold;
+    color: $greyscale-black;
+}
+.vat-text{
+    @include text-caption-small;
+    color: $greyscale-dark-grey;
+}
+.delete-icon-row{
+    background-color: rgb(255, 162, 162);
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    img{
+
+    }
+}

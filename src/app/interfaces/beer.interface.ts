@@ -12,4 +12,5 @@ export interface IBeer {
   content?: number;
   onSale: number;
   badges: IBadge[];
+  quantity?: number;
 }

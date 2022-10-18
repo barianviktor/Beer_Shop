@@ -1,0 +1,10 @@
+<div [ngStyle]="{ width: width }" class="spinner-container">
+  <button (click)="onDecrementClick()" class="left-button">
+    <img src="assets/icons/minus.svg" alt="minus" />
+  </button>
+  <input type="number" [value]="value" />
+  <!--  [formControl]="control" -->
+  <button (click)="onIncrementClick()" class="right-button">
+    <img src="assets/icons/plus.svg" alt="minus" />
+  </button>
+</div>

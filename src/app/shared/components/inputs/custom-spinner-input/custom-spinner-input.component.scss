@@ -1,0 +1,60 @@
+@use "../../../../../assets/styles/" as *;
+
+.spinner-container{
+    height: 40px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+*{
+    background-color: $greyscale-white;
+    outline: none;
+    height: 100%;
+    border: none
+    
+}
+button{
+    @include flex-everything-centered;
+    border: 1px solid $greyscale-dark-grey;
+    width: 40px;
+    cursor: pointer;
+    img{
+        
+        width:24px; 
+        height: 24px;
+
+    }
+    &:hover{
+       // border: 1px solid $greyscale-black;
+    }
+    &:focus{
+        border: 2px solid $accent-orange;
+    }
+}
+.left-button{
+    border-radius: 4px 0px 0px 4px;
+    &:focus{
+        border-radius: 0px;
+    }
+}
+.right-button{
+    border-radius: 0px 4px 4px 0px;
+    &:focus{
+        border-radius: 0px;
+    }
+}
+input{
+   border-top: 1px solid $greyscale-dark-grey;
+   border-bottom: 1px solid $greyscale-dark-grey;
+   width: 100%;
+    text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield; 
+}

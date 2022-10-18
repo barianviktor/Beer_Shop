@@ -35,45 +35,7 @@
 ></app-custom-text-input>
 <app-custom-checkbox-input></app-custom-checkbox-input>
 <app-custom-searchbar-input></app-custom-searchbar-input>
-
-<!-- <div *ngIf="beer$ | async as beer">
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    id<strong> {{ beer.id }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    image_url<strong> {{ beer.image_url }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    name<strong> {{ beer.name }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    contributed_by<strong> {{ beer.contributed_by }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    description<strong> {{ beer.description }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    price<strong> {{ beer.price }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    description<strong> {{ beer.description }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    content<strong> {{ beer.content }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    badges<strong> {{ beer.badges | json }}</strong>
-  </p>
-  <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
-    onSale<strong> {{ beer.onSale }}</strong>
-  </p>
-</div>
-<pre>
-
-  {{ beerSearchCard$ | async | json }}
-</pre>
--->
-
+<app-custom-spinner-input></app-custom-spinner-input>
 <app-search-item-card
   *ngIf="beerSearchCard$ | async as beerSearchCard"
   [beer]="beerSearchCard"

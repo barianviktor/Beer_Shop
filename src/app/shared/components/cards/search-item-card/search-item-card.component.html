@@ -26,14 +26,16 @@
         ></app-icon-only-button>
       </div>
     </div>
-    <div class="image-container">
+    <a [routerLink]="['beer', beer.id]" class="image-container">
       <img [src]="beer.image_url" alt="" />
-    </div>
+    </a>
   </div>
   <div class="product-main">
     <div class="discription-container">
       <p class="tagline-text">{{ beer.contributed_by }}</p>
-      <h5 class="name-text">{{ beer.name }}</h5>
+      <a [routerLink]="['beer', beer.id]">
+        <h5 class="name-text">{{ beer.name }}</h5>
+      </a>
       <p class="tagline-text">{{ beer.tagline }}</p>
     </div>
   </div>

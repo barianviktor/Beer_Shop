@@ -79,24 +79,31 @@ export class BeerService {
 
   giveBeerBonusCredentials(beer: IBeer): IBeer {
     //price and content
+
     let whislist = this.whislistService.whistlist$.getValue();
-    let cartItemsList = this.whislistService.whistlist$.getValue();
+    let cartItemsList = this.cartService.shoppingCart$.getValue();
+
     let whisBeer = whislist.find(
       (listedBeer: ISavedBeer) => beer.id == listedBeer.id
     );
-    let cartBeer = cartItemsList.find(
-      (listedBeer: ISavedBeer) => beer.id == listedBeer.id
-    );
+    let cartBeer = cartItemsList.find((listedBeer: ISavedBeer) => {
+      console.log(listedBeer.id, beer.id);
+
+      return beer.id == listedBeer.id;
+    });
+    console.log(cartBeer);
     if (whisBeer) {
-      beer = {
-        ...beer,
-        ...whisBeer,
-      };
+      beer.price = whisBeer.price;
+      beer.content = whisBeer.content;
+      beer.badges = whisBeer.badges;
+      beer.content = whisBeer.content;
+      beer.quantity = whisBeer.quantity;
     } else if (cartBeer) {
-      beer = {
-        ...beer,
-        ...cartBeer,
-      };
+      beer.price = cartBeer.price;
+      beer.content = cartBeer.content;
+      beer.badges = cartBeer.badges;
+      beer.content = cartBeer.content;
+      beer.quantity = cartBeer.quantity;
     } else {
       beer.badges = [];
       beer.onSale = 0;
@@ -145,6 +152,7 @@ export class BeerService {
         });
       }
     }
+    console.log(beer);
 
     return beer;
   }

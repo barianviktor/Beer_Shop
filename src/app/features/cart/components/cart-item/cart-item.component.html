@@ -1,0 +1,36 @@
+<div class="cart-item-container">
+  <div class="items-row">
+    <div class="product-container">product</div>
+    <div class="contributor-container">
+      <p>{{ item.contributed_by }}</p>
+    </div>
+    <div class="price-container">
+      <div>
+        <p class="price-text">{{ item.price | currency: "EUR" }}</p>
+        <p class="vat-text">Excl. VAT</p>
+      </div>
+    </div>
+    <div class="quantity-container">
+      <app-custom-spinner-input
+        [value]="item.quantity!"
+        (decrementEmit)="onDecrementClick()"
+        (incrementEmit)="onIncrementClick()"
+      ></app-custom-spinner-input>
+    </div>
+    <div class="subtotal-container">
+      <div *ngIf="item.price && item.quantity">
+        <p class="price-text">
+          {{ item.price * item.quantity | currency: "EUR" }}
+        </p>
+        <p class="vat-text">Excl. VAT</p>
+      </div>
+    </div>
+  </div>
+  <div class="delete-icon-row">
+    <app-icon-only-button
+      (buttonClicked)="deleteItem()"
+      [icon_path]="'assets/icons/delete.svg'"
+    >
+    </app-icon-only-button>
+  </div>
+</div>
