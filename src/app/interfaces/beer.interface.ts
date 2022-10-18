@@ -10,6 +10,6 @@ export interface IBeer {
   facts: {};
   price?: number;
   content?: number;
-  onSale?: number;
+  onSale: number;
   badges: IBadge[];
 }

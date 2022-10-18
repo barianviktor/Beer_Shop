@@ -9,5 +9,5 @@ export interface IBeerSearchCard {
   price?: number;
   content?: number;
   badges: IBadge[];
-  onSale?: number;
+  onSale: number;
 }

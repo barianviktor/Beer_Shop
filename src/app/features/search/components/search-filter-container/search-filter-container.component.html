@@ -1,0 +1,19 @@
+<div [ngStyle]="{ width: width }" class="filter-container">
+  <div class="filter-header" (click)="handleOpenClose()">
+    <p>{{ title }}</p>
+    <img
+      [ngClass]="{ fliped: isOpen }"
+      [src]="'assets/icons/arrow-down.svg'"
+      alt="arrow-icon"
+    />
+  </div>
+  <div [ngClass]="{ open: isOpen, closed: !isOpen }" class="filter-section">
+    <div class="item" *ngFor="let control of formGroup.controls | keyvalue">
+      <app-custom-checkbox-input
+        [text]="control.key"
+        [control]="castAbstractControlToBoolean(control.value)"
+        [id]="control.key + '_input_checkbox'"
+      ></app-custom-checkbox-input>
+    </div>
+  </div>
+</div>

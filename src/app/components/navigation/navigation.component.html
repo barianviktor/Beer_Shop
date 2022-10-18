@@ -1,0 +1,57 @@
+<nav>
+  <div class="first-row">
+    <div>
+      <img [src]="'assets/icons/contact.svg'" alt="contact-icon" />
+      <span>Contact</span>
+    </div>
+    <div>
+      <img [src]="'assets/icons/globe.svg'" alt="globe-icon" />
+      EN
+      <img [src]="'assets/icons/arrow-down.svg'" alt="arrow-icon" />
+    </div>
+  </div>
+  <div class="second-row">
+    <div class="logo-container">
+      <a [routerLink]="['/']">
+        <img src="assets/images/logo.png" alt="logo" />
+      </a>
+    </div>
+    <section>
+      <div class="controls">
+        <div class="search-container">
+          <app-custom-searchbar-input
+            [width]="'100%'"
+          ></app-custom-searchbar-input>
+        </div>
+        <div class="menu-items-buttons-container">
+          <app-menu-item-icon></app-menu-item-icon>
+
+          <app-menu-item-icon
+            *ngIf="whisList$ | async as whisList"
+            [icon_path]="'assets/icons/heart.svg'"
+            [text]="'Whislist (' + whisList.length + ')'"
+            [goTo]="['/whislist']"
+          ></app-menu-item-icon>
+          <app-menu-item-icon
+            [icon_path]="'assets/icons/navigation.svg'"
+            [text]="'Compare (' + '0' + ')'"
+          ></app-menu-item-icon>
+          <app-menu-item-icon
+            *ngIf="cart$ | async as cart"
+            [icon_path]="'assets/icons/shopping.svg'"
+            [text]="'Cart (' + cart.length + ')'"
+            [goTo]="['/shopping-cart']"
+          ></app-menu-item-icon>
+        </div>
+      </div>
+      <div class="sub-controls">
+        <app-menu-item-text
+          [active]="true"
+          [text]="'All Beers'"
+        ></app-menu-item-text>
+        <app-menu-item-text [text]="'Packages'"></app-menu-item-text>
+        <app-menu-item-text [text]="'Beer Gifts'"></app-menu-item-text>
+      </div>
+    </section>
+  </div>
+</nav>

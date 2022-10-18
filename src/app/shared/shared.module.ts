@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CustomCheckboxInputComponent } from './components/inputs/custom-checkbox-input/custom-checkbox-input.component';
 import { CustomSearchbarInputComponent } from './components/inputs/custom-searchbar-input/custom-searchbar-input.component';
 import { SearchItemCardComponent } from './components/cards/search-item-card/search-item-card.component';
+import { PercentOffBadgeComponent } from './components/badges/percent-off-badge/percent-off-badge.component';
+import { OnlyIconComponent } from './components/only-icon/only-icon.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { SearchItemCardComponent } from './components/cards/search-item-card/sea
     CustomCheckboxInputComponent,
     CustomSearchbarInputComponent,
     SearchItemCardComponent,
+    PercentOffBadgeComponent,
+    OnlyIconComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -57,6 +61,8 @@ import { SearchItemCardComponent } from './components/cards/search-item-card/sea
     CustomTextInputComponent,
     CustomCheckboxInputComponent,
     CustomSearchbarInputComponent,
+    SearchItemCardComponent,
+    PercentOffBadgeComponent,
   ],
 })
 export class SharedModule {}

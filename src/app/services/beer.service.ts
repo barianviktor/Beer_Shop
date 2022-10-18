@@ -1,21 +1,54 @@
+import { ISavedBeer } from './../interfaces/savedBeer.interface';
+import { CartService } from './cart.service';
+import { WhislistService } from './whislist.service';
 import { IBeer } from './../interfaces/beer.interface';
 import { environment } from './../../environments/environment';
 import { IBeerSearchCard } from './../interfaces/beer-search-card.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BeerService {
   API = environment.api + '/beers';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private whislistService: WhislistService,
+    private cartService: CartService
+  ) {}
 
+  getMultipleBeerFromIds$(ids: number[]): Observable<IBeer[]> {
+    if (ids.length > 0) {
+      console.log(this.API + '/' + ids.join('|'));
+
+      return this.http.get<IBeer[]>(this.API + '?ids=' + ids.join('|')).pipe(
+        map((beers: IBeer[]) => {
+          beers.forEach((beer: IBeer) => {
+            beer = this.giveBeerBonusCredentials(beer);
+          });
+          return beers;
+        })
+      );
+    } else {
+      return of([]);
+    }
+  }
   getBeer$(id: number): Observable<IBeer> {
     return this.http.get<IBeer[]>(this.API + '/' + id).pipe(
       map((beers: IBeer[]) => {
         return this.giveBeerBonusCredentials(beers[0]);
+      })
+    );
+  }
+  getBeers$(): Observable<IBeer[]> {
+    return this.http.get<IBeer[]>(this.API).pipe(
+      map((beers: IBeer[]) => {
+        beers.forEach((beer: IBeer) => {
+          beer = this.giveBeerBonusCredentials(beer);
+        });
+        return beers;
       })
     );
   }
@@ -30,53 +63,87 @@ export class BeerService {
       })
     );
   }
+  getBeerSearchCards$(): Observable<IBeerSearchCard[]> {
+    return this.getBeers$().pipe(
+      map((beers: IBeer[]) => {
+        let searchCards: IBeerSearchCard[] = [];
+        beers.forEach((beer: IBeer) => {
+          searchCards.push({
+            ...beer,
+          });
+        });
+        return searchCards;
+      })
+    );
+  }
 
   giveBeerBonusCredentials(beer: IBeer): IBeer {
     //price and content
-    beer.badges = [];
-    if (beer.id % 6 != 0) {
-      beer.price = this.getRandomFloat(5, 16, 2);
-      switch (this.getRandomNumber(0, 3)) {
-        case 0:
-          beer.content = 0.33;
-          break;
-        case 1:
-          beer.content = 0.44;
-          break;
-        case 2:
-          beer.content = 0.5;
-          break;
-        default:
-          beer.content = 0.66;
-          break;
-      }
-      if (Math.random() > 0.7) {
-        //on sale
-        beer.onSale = this.getRandomNumber(5, 35);
-      }
-      if (Math.random() > 0.8) {
-        //new
-
-        beer.badges.push({
-          id: 2,
-          name: 'New',
-        });
-      } else {
+    let whislist = this.whislistService.whistlist$.getValue();
+    let cartItemsList = this.whislistService.whistlist$.getValue();
+    let whisBeer = whislist.find(
+      (listedBeer: ISavedBeer) => beer.id == listedBeer.id
+    );
+    let cartBeer = cartItemsList.find(
+      (listedBeer: ISavedBeer) => beer.id == listedBeer.id
+    );
+    if (whisBeer) {
+      beer = {
+        ...beer,
+        ...whisBeer,
+      };
+    } else if (cartBeer) {
+      beer = {
+        ...beer,
+        ...cartBeer,
+      };
+    } else {
+      beer.badges = [];
+      beer.onSale = 0;
+      if (beer.id % 6 != 0) {
+        beer.price = this.getRandomFloat(5, 16, 2);
+        switch (this.getRandomNumber(0, 3)) {
+          case 0:
+            beer.content = 0.33;
+            break;
+          case 1:
+            beer.content = 0.44;
+            break;
+          case 2:
+            beer.content = 0.5;
+            break;
+          default:
+            beer.content = 0.66;
+            break;
+        }
+        if (Math.random() > 0.7) {
+          //on sale
+          beer.onSale = this.getRandomNumber(5, 35);
+        }
         if (Math.random() > 0.8) {
-          //product of the week
+          //new
 
           beer.badges.push({
-            id: 3,
-            name: 'Product of the week',
+            id: 2,
+            name: 'New',
           });
+        } else {
+          if (Math.random() > 0.8) {
+            //product of the week
+
+            beer.badges.push({
+              id: 3,
+              name: 'Product of the week',
+            });
+          }
         }
+      } else {
+        //out of stock
+        beer.badges.push({
+          id: 1,
+          name: 'Sold Out',
+        });
       }
-    } else {
-      //out of stock
-      beer.badges.push({
-        id: 1,
-        name: 'Sold Out',
-      });
     }
 
     return beer;

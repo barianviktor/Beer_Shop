@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'assets/styles/' as *;
+body{
+    
+    padding: 0 20px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $most_cases_font;
+    transition: all 0.15s ease;
+}
+
+h1{
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 800;
+}
+h2{
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 800;
+}
+h3{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+}
+h4{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+h5{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 800;
+}
+
+p{
+    @include text-standard;
+}
+
+.link{
+    width: fit-content;
+    display: inline-block;
+    outline: none;
+    @include text-caption;
+    color: $primary-turquoise-dark;
+    border: 2px solid $greyscale-white;
+
+    text-decoration: none;
+}
+.link:hover{
+    text-decoration: underline;
+}
+.link:focus{
+    text-decoration: underline;
+    border: 2px solid $accent-orange;
+}
+.hearth_icon{
+    mask-image: url("/assets/icons/heart.svg");
+
+}

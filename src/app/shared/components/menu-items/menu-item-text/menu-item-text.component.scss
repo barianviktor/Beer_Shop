@@ -27,10 +27,10 @@ div:focus{
     color: $primary-turquoise-dark;
     border: 2px solid $accent-orange;
 }
-div:active{
-    border-left: 2px solid $greyscale-white;
-    border-top: 2px solid $greyscale-white;
-    border-right: 2px solid $greyscale-white;
-    border-bottom: 2px solid $primary-turquoise-dark;
-    color: $greyscale-black;
+.active{
+    border-left: 2px solid $greyscale-white !important;
+    border-top: 2px solid $greyscale-white !important;
+    border-right: 2px solid $greyscale-white !important;
+    border-bottom: 2px solid $primary-turquoise-dark !important;
+    color: $greyscale-black !important;
 }

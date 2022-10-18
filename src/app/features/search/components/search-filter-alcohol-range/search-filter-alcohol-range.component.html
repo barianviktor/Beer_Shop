@@ -1,0 +1,35 @@
+<div [ngStyle]="{ width: width }" class="filter-container">
+  <div class="filter-header" (click)="handleOpenClose()">
+    <p>{{ title }}</p>
+    <img
+      [ngClass]="{ fliped: isOpen }"
+      [src]="'assets/icons/arrow-down.svg'"
+      alt="arrow-icon"
+    />
+  </div>
+  <div [ngClass]="{ open: isOpen, closed: !isOpen }" class="filter-section">
+    <div class="item">
+      <app-custom-text-input
+        [type]="'number'"
+        [width]="'92px'"
+        [control]="greaterAbvControl"
+        [placeholder]="lesserPlaceHolder"
+      ></app-custom-text-input>
+    </div>
+    <div class="item">
+      <app-custom-text-input
+        [type]="'number'"
+        [width]="'92px'"
+        [control]="lesserAbvControl"
+        [placeholder]="greaterPlaceHolder"
+      ></app-custom-text-input>
+    </div>
+    <div class="item">
+      <app-text-button
+        [width]="'85px '"
+        [text]="'Apply'"
+        (buttonClicked)="onClick()"
+      ></app-text-button>
+    </div>
+  </div>
+</div>

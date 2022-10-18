@@ -1,3 +1,7 @@
-<div tabindex="0" [ngStyle]="{ width: width, borderRadius: borderRadius }">
+<div
+  [class.active]="active"
+  tabindex="0"
+  [ngStyle]="{ width: width, borderRadius: borderRadius }"
+>
   {{ text }}
 </div>

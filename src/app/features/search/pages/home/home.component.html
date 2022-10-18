@@ -1,0 +1,61 @@
+<div class="search-page">
+  <div class="paggination"></div>
+  <h1>All Beers</h1>
+  <div class="filters-container">
+    <app-search-filter-container
+      [formGroup]="hops"
+      [title]="'Hops'"
+    ></app-search-filter-container>
+    <app-search-filter-container
+      [formGroup]="malts"
+      [title]="'Malts'"
+    ></app-search-filter-container>
+    <app-search-filter-alcohol-range
+      (setAlcoholRange)="onSetAlcoholRange($event)"
+    ></app-search-filter-alcohol-range>
+    <div class="button-container">
+      <app-secondary-button
+        (buttonClicked)="onResetToDefault()"
+        [text]="'Reset to default'"
+      ></app-secondary-button>
+    </div>
+  </div>
+  <section class="main-content">
+    <div class="active-filters-container">
+      <p class="text">Active Filters</p>
+      <div class="active-filters">
+        <ng-container *ngFor="let control of hops.controls | keyvalue">
+          <app-filter-tag
+            class="item"
+            *ngIf="control.value.value"
+            [text]="control.key"
+            (iconClicked)="
+              deleteFilter(castAbsContToFormContBool(control.value))
+            "
+          ></app-filter-tag>
+        </ng-container>
+        <ng-container *ngFor="let control of malts.controls | keyvalue">
+          <app-filter-tag
+            class="item"
+            *ngIf="control.value.value"
+            [text]="control.key"
+            (iconClicked)="
+              deleteFilter(castAbsContToFormContBool(control.value))
+            "
+          ></app-filter-tag>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="search-items-container">
+      <div *ngFor="let searchCard of beerCards$ | async" class="search-item">
+        <app-search-item-card
+          (cartEmit)="onHandleCart($event)"
+          (favouriteEmit)="onHandleWhislist($event)"
+          [beer]="searchCard"
+          [favourited]="isInWhislist(searchCard.id)"
+        ></app-search-item-card>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,65 @@
+@use '../../../../../assets/styles/' as *;
+
+.search-page{
+    width: 100%;
+    max-width: 1450px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+.filters-container{
+    grid-column: 1/4;
+    padding-right: 25px;
+    * {
+        margin: 12px 0;
+      
+    }
+}
+.main-content{
+    grid-column: 4  /13;
+    width: 100%;
+    
+}
+.active-filters-container{
+    width: 100%;
+    display: none;
+
+    margin: 16px 0;
+    .text{
+        margin: 8px;
+        @include  text-caption-bold;
+        
+    }
+
+    .active-filters{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .item{
+            margin: 8px;
+        }
+    }
+    &:has(.item){
+        display: block;
+    }
+}
+.search-items-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+}
+.search-item{
+    width: 100%;
+    height: fit-content;
+
+    padding: 15px;
+}
+
+.button-container{
+    
+    width: 100%;
+    max-width: 305px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

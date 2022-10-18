@@ -36,7 +36,7 @@
 <app-custom-checkbox-input></app-custom-checkbox-input>
 <app-custom-searchbar-input></app-custom-searchbar-input>
 
-<div *ngIf="beer$ | async as beer">
+<!-- <div *ngIf="beer$ | async as beer">
   <p [ngStyle]="{ display: 'flex', alignItems: 'center' }">
     id<strong> {{ beer.id }}</strong>
   </p>
@@ -72,3 +72,10 @@
 
   {{ beerSearchCard$ | async | json }}
 </pre>
+-->
+
+<app-search-item-card
+  *ngIf="beerSearchCard$ | async as beerSearchCard"
+  [beer]="beerSearchCard"
+>
+</app-search-item-card>

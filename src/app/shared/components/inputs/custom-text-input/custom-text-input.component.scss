@@ -1,5 +1,14 @@
 @use "../../../../../assets/styles/" as *;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 .input-container{
     
     display: flex;
@@ -15,7 +24,8 @@ input{
     padding: 8px 16px;
     outline: none;
     color: $greyscale-black;
-
+    height: 40px;
+    min-width: 42px;
 }
 input::placeholder{
     color: $greyscale-dark-grey;

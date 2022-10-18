@@ -1,0 +1,33 @@
+@use '../../../../../assets/styles/' as *;
+.filter-container{
+    overflow: hidden;
+    height: fit-content;
+}
+.open{
+    max-height: 1000px;
+   
+}
+.closed{
+    max-height:0px;
+}
+.filter-header{
+    p{
+        @include text-bold;
+        padding: 9px 0;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+  
+}
+.filter-section{
+    .item{
+        margin: 10px 0;
+    }
+    height: fit-content;
+}
+.fliped{
+    transform: rotate(180deg);
+}

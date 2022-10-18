@@ -10,6 +10,7 @@ export class MenuItemIconComponent implements OnInit {
   @Input() text: string = 'My Account';
   @Input() width: string = 'auto';
   @Input() borderRadius: string = '0px';
+  @Input() goTo: string[] = [''];
   @Output() itemClicked = new EventEmitter<void>();
   constructor() {}
 

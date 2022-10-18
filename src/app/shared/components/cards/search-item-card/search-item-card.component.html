@@ -1,1 +1,109 @@
-<p>search-item-card works!</p>
+<div class="card-container">
+  <div class="product-header">
+    <div class="icons-badges-container">
+      <div class="badges">
+        <app-sale-badge *ngIf="beer.onSale"></app-sale-badge>
+
+        <ng-container *ngFor="let badge of beer.badges">
+          <ng-container [ngSwitch]="badge.name">
+            <app-new-badge *ngSwitchCase="'New'"></app-new-badge>
+            <app-sold-out-badge *ngSwitchCase="'Sold out'"></app-sold-out-badge>
+            <app-product-of-the-week-badge
+              *ngSwitchCase="'Product of the week'"
+            ></app-product-of-the-week-badge>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="icons">
+        <app-icon-only-button></app-icon-only-button>
+        <!--  <app-only-icon
+          [color]="'red'"
+          [icon_name]="'assets/icons/heart.svg'"
+        ></app-only-icon> -->
+        <app-icon-only-button
+          (buttonClicked)="onHearthClick()"
+          [icon_path]="'assets/icons/heart.svg'"
+        ></app-icon-only-button>
+      </div>
+    </div>
+    <div class="image-container">
+      <img [src]="beer.image_url" alt="" />
+    </div>
+  </div>
+  <div class="product-main">
+    <div class="discription-container">
+      <p class="tagline-text">{{ beer.contributed_by }}</p>
+      <h5 class="name-text">{{ beer.name }}</h5>
+      <p class="tagline-text">{{ beer.tagline }}</p>
+    </div>
+  </div>
+  <div class="product-footer">
+    <div class="price-container">
+      <ng-container *ngIf="beer.price">
+        <ng-container *ngIf="beer.onSale; else elseblock">
+          <div>
+            <h2>
+              {{ (beer.price! / 100) * (100 - beer.onSale) | currency: "EUR" }}
+            </h2>
+            <p class="annual-price">{{ beer.price | currency: "EUR" }}</p>
+          </div>
+          <app-percent-off-badge
+            [percent]="beer.onSale"
+          ></app-percent-off-badge>
+        </ng-container>
+        <ng-template #elseblock>
+          <h2>{{ beer.price | currency: "EUR" }}</h2>
+        </ng-template>
+      </ng-container>
+    </div>
+    <div class="content-container">
+      <ng-container *ngIf="beer.content">
+        <span>Content</span>
+        <span> {{ beer.content }} Liter</span>
+      </ng-container>
+    </div>
+    <div class="add-to-cart-container">
+      <ng-container *ngIf="beer.price">
+        <app-custom-text-input
+          [control]="quantityControl"
+          [type]="'number'"
+          [width]="'42px'"
+        ></app-custom-text-input>
+        <app-primary-button
+          (buttonClicked)="onCartClick()"
+        ></app-primary-button>
+      </ng-container>
+    </div>
+  </div>
+  <!-- 
+
+        <div *ngIf="beer.onSale" class="price-container">
+      <div>
+        <h2>
+          {{ (beer.price! / 100) * (100 - beer.onSale) | currency: "EUR" }}
+        </h2>
+        <p class="annual-price">{{ beer.price | currency: "EUR" }}</p>
+      </div>
+      <app-percent-off-badge [percent]="beer.onSale"></app-percent-off-badge>
+    </div>
+    <div *ngIf="!beer.onSale" class="price-container">
+      <h2>{{ beer.price | currency: "EUR" }}</h2>
+    </div>
+    <div class="content-container">
+      <ng-container *ngIf="beer.content">
+        <span>Content</span>
+        <span> {{ beer.content }} Liter</span>
+      </ng-container>
+    </div>
+ <div class="product-footer">
+    <div class="add-to-cart-container">
+      <app-custom-text-input
+        [control]="quantityControl"
+        [type]="'number'"
+        [width]="'42px'"
+      ></app-custom-text-input>
+      <app-primary-button (buttonClicked)="onCartClick()"></app-primary-button>
+    </div>
+  </div>
+   -->
+</div>

@@ -1,0 +1,99 @@
+@use "../../../../../assets/styles/" as *;
+
+.card-container{
+    height: fit-content;
+    border-radius: 4px;
+    border: 1px solid $greyscale-light-grey;
+    width: 100%;
+    min-width: 250px;
+    background-color: $greyscale-white;
+    box-shadow: 0px 2px 4px rgba(5, 7, 32, 0.08);
+    padding: 16px;
+}
+.card-container:hover{
+    img{
+        scale: 1.3;
+    }
+    .name-text{
+        color: $primary-turquoise-dark;
+    }
+}
+.icons-badges-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icons{
+    display: flex;
+    align-items: center;
+}
+.badges{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.badges *{
+    margin-right: 6px;
+}
+.image-container{
+    margin: 16px 0;
+    height: 160px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.image-container img {
+    height: 90%;
+
+}
+.name-text{
+    font-weight: 900 !important;
+    line-height: 28px !important;
+}
+.tagline-text{
+    @include text-caption;
+    color: $greyscale-dark-grey;
+}
+.add-to-cart-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 55px;
+}
+.product-footer *{
+    margin-top: 16px;
+}
+app-primary-button {
+    margin-left: 14px;
+}
+.content-container{
+    @include text-caption;
+    color: $greyscale-dark-grey;
+    height: 25px;
+}
+.content-container span:nth-child(1){
+    color: $greyscale-black;
+}
+.product-main{
+    min-height: 100px;
+}
+.price-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    height: 35px;
+}
+
+.price-container div {
+    display: inline-flex;
+    align-items: center;
+}
+.annual-price{
+    @include text-caption;
+    color: $greyscale-dark-grey;
+    margin: 0 6px;
+}
