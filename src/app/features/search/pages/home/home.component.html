@@ -1,7 +1,7 @@
 <div class="search-page">
   <div class="paggination"></div>
   <h1>All Beers</h1>
-  <div class="filters-container">
+  <!--   <div class="filters-container">
     <app-search-filter-container
       [formGroup]="hops"
       [title]="'Hops'"
@@ -19,9 +19,9 @@
         [text]="'Reset to default'"
       ></app-secondary-button>
     </div>
-  </div>
+  </div> -->
   <section class="main-content">
-    <div class="active-filters-container">
+    <!-- <div class="active-filters-container">
       <p class="text">Active Filters</p>
       <div class="active-filters">
         <ng-container *ngFor="let control of hops.controls | keyvalue">
@@ -45,7 +45,7 @@
           ></app-filter-tag>
         </ng-container>
       </div>
-    </div>
+    </div> -->
 
     <div class="search-items-container">
       <div *ngFor="let searchCard of beerCards$ | async" class="search-item">

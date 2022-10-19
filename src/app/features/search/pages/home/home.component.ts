@@ -16,7 +16,6 @@ import { SearchService } from './../../../../services/search.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  searchBeerForm: FormGroup<ISearchBeerFormInterface>;
   beerCards$: Observable<IBeerSearchCard[]>;
   constructor(
     private beerService: BeerService,
@@ -24,33 +23,21 @@ export class HomeComponent implements OnInit {
     private whislistService: WhislistService,
     private cartService: CartService
   ) {
-    this.searchBeerForm = searchService.searchBeerForm;
     this.beerCards$ = this.beerService.getBeerSearchCards$();
   }
   castAbsContToFormContBool(control: AbstractControl): FormControl<boolean> {
     return control as FormControl<boolean>;
   }
-  get hops(): FormGroup {
-    return this.searchBeerForm.get('hops') as FormGroup;
-  }
-  get malts(): FormGroup {
-    return this.searchBeerForm.get('malts') as FormGroup;
-  }
-  get abv_gt(): FormControl {
-    return this.searchBeerForm.get('abv_gt') as FormControl;
-  }
-  get abv_lt(): FormControl {
-    return this.searchBeerForm.get('abv_lt') as FormControl;
-  }
+
   ngOnInit(): void {}
-  onSetAlcoholRange(res: { abv_gt: string; abv_lt: string }) {
+  /*   onSetAlcoholRange(res: { abv_gt: string; abv_lt: string }) {
     this.abv_gt.setValue(res.abv_gt);
     this.abv_lt.setValue(res.abv_lt);
   }
   onResetToDefault() {
     console.log(this.searchBeerForm);
     console.log(this.searchService.searchBeerForm);
-  }
+  } */
   onHandleWhislist(beer: IBeerSearchCard) {
     this.whislistService.addOrRemoveFromList(beer);
   }
