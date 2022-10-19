@@ -20,6 +20,16 @@
       ></app-secondary-button>
     </div>
   </div> -->
+  <div class="filters-containers">
+    <app-search-filter-container
+      [datas]="hops"
+      [title]="'Hops'"
+      [width]="'100%'"
+      [selectedValues]="beerSearchParameters.hops"
+      (checkboxClicked)="onHandleHopsCheckbox($event)"
+    >
+    </app-search-filter-container>
+  </div>
   <section class="main-content">
     <!-- <div class="active-filters-container">
       <p class="text">Active Filters</p>

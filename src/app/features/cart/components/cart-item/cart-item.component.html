@@ -6,7 +6,9 @@
     </div>
     <div class="price-container">
       <div>
-        <p class="price-text">{{ item.price | currency: "EUR" }}</p>
+        <p class="price-text">
+          {{ (item.price! * (100 - item.onSale)) / 100 | currency: "EUR" }}
+        </p>
         <p class="vat-text">Excl. VAT</p>
       </div>
     </div>
@@ -20,7 +22,10 @@
     <div class="subtotal-container">
       <div *ngIf="item.price && item.quantity">
         <p class="price-text">
-          {{ item.price * item.quantity | currency: "EUR" }}
+          {{
+            ((item.price! * (100 - item.onSale)) / 100) * item.quantity
+              | currency: "EUR"
+          }}
         </p>
         <p class="vat-text">Excl. VAT</p>
       </div>

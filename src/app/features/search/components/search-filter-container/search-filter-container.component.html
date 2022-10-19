@@ -8,12 +8,14 @@
     />
   </div>
   <div [ngClass]="{ open: isOpen, closed: !isOpen }" class="filter-section">
-    <div class="item" *ngFor="let control of formGroup.controls | keyvalue">
+    <div class="item" *ngFor="let data of datas">
       <app-custom-checkbox-input
-        [text]="control.key"
-        [control]="castAbstractControlToBoolean(control.value)"
-        [id]="control.key + '_input_checkbox'"
+        [data]="data"
+        [id]="data + '_input_checkbox'"
+        [value]="selectedValues.includes(data)"
+        (click)="onCheckboxClicked(data)"
       ></app-custom-checkbox-input>
+      <button (click)="onCheckboxClicked(data)">{{ data }}</button>
     </div>
   </div>
 </div>

@@ -4,5 +4,13 @@
     [item]="item"
     (increaseQuantity)="onIncrementQuantity($event)"
     (decreaseQuantity)="onDecrementQuantity($event)"
+    (removeItem)="onRemoveItem(item.id)"
   ></app-cart-item>
+  <app-checkout-card
+    [freeShippingFrom]="getFreeShippingFrom()"
+    [shipping]="getShippingCost()"
+    [vat]="getVatCost()"
+    [itemsValue]="getItemsCost()"
+    [total]="getTotalCost()"
+  ></app-checkout-card>
 </div>

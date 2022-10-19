@@ -1,0 +1,32 @@
+@use '../../../../../assets/styles/' as *;
+
+section{
+    background-color: $greyscale-very-light-grey;
+    width: 100%;
+    padding: 30px;
+    max-width: 400px;
+    min-width: 250px;
+}
+.card-header{
+   
+}
+.card-main{
+    margin: 16px 0;
+    padding: 16px 0;
+    border-top: 1px solid $greyscale-grey;
+    border-bottom: 1px solid $greyscale-grey;
+}
+.item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.total{
+    font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+}
+.card-footer{
+    margin-top: 16px;
+}

@@ -1,4 +1,4 @@
-<div tabindex="0" class="checkbox-container">
-  <input [id]="id" type="checkbox" [formControl]="control" />
-  <label [for]="id">{{ text }}</label>
+<div (click)="onHandleClick()" tabindex="0" class="checkbox-container">
+  <input [id]="id" type="checkbox" [value]="value" />
+  <label [for]="id">{{ data }}</label>
 </div>

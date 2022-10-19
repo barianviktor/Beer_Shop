@@ -9,6 +9,7 @@ import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { ISearchBeerFormInterface } from 'src/app/interfaces/searchBeerForm.interface';
 import { ISearchHopsFilterForm } from './../../../../interfaces/searchHopsFilterForm.interface';
 import { SearchService } from './../../../../services/search.service';
+import { IBeerSearchParameters } from 'src/app/interfaces/beerSearchParameters.interface';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,9 @@ import { SearchService } from './../../../../services/search.service';
 })
 export class HomeComponent implements OnInit {
   beerCards$: Observable<IBeerSearchCard[]>;
+  hops: string[] = [];
+  malts: string[] = [];
+  beerSearchParameters: IBeerSearchParameters;
   constructor(
     private beerService: BeerService,
     private searchService: SearchService,
@@ -24,6 +28,9 @@ export class HomeComponent implements OnInit {
     private cartService: CartService
   ) {
     this.beerCards$ = this.beerService.getBeerSearchCards$();
+    this.hops = this.searchService.hops;
+    this.malts = this.searchService.malts;
+    this.beerSearchParameters = this.searchService.searchParameters;
   }
   castAbsContToFormContBool(control: AbstractControl): FormControl<boolean> {
     return control as FormControl<boolean>;
@@ -45,11 +52,12 @@ export class HomeComponent implements OnInit {
     return this.whislistService.isInTheList(id);
   }
   onHandleCart(cart: { beer: IBeerSearchCard; quantity: number }) {
-    console.log(this.cartService.shoppingCart$.getValue());
     this.cartService.addToCart(cart.beer, cart.quantity);
-    console.log(this.cartService.shoppingCart$.getValue());
   }
   deleteFilter(control: FormControl<boolean>) {
     control.setValue(false);
+  }
+  onHandleHopsCheckbox(item: string): void {
+    this.searchService.onHandleHops(item);
   }
 }

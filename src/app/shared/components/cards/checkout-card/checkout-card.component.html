@@ -1,0 +1,46 @@
+<section>
+  <div class="card-header">
+    <h4>Summary</h4>
+    <p>
+      Free shipping from {{ freeShippingFrom | currency: "EUR":true:"2.0" }}
+    </p>
+  </div>
+  <div class="card-main">
+    <div class="item">
+      <span> Items: </span>
+      <span>
+        {{ itemsValue | currency: "EUR" }}
+      </span>
+    </div>
+    <div class="item">
+      <span> VAT: </span>
+      <span>
+        {{ vat | currency: "EUR" }}
+      </span>
+    </div>
+    <div class="item">
+      <span> Shipping & handling </span>
+      <span>
+        <ng-container
+          *ngIf="freeShippingFrom > itemsValue + vat + shipping; else elseBlock"
+        >
+          {{ shipping | currency: "EUR" }}
+        </ng-container>
+        <ng-template #elseBlock> Free </ng-template>
+      </span>
+    </div>
+  </div>
+
+  <div class="item total">
+    <span> ORDER TOTAL </span>
+    <span>
+      {{ total | currency: "EUR" }}
+    </span>
+  </div>
+  <div class="card-footer">
+    <app-primary-button
+      [width]="'100%'"
+      [text]="'checkout'"
+    ></app-primary-button>
+  </div>
+</section>

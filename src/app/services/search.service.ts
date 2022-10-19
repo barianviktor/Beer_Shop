@@ -32,7 +32,18 @@ export class SearchService {
     'dark_crystal',
     'amber',
   ];
-  constructor() {
-    console.log(this.searchParameters);
+  constructor() {}
+  onHandleHops(item: string): void {
+    console.log(item);
+
+    if (this.searchParameters.hops.includes(item)) {
+      this.searchParameters.hops.splice(
+        this.searchParameters.hops.findIndex((el) => el === item),
+        1
+      );
+    } else {
+      this.searchParameters.hops.push(item);
+    }
+    console.log(this.searchParameters.hops);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,18 +9,21 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 export class SearchFilterContainerComponent implements OnInit {
   isOpen = true;
   @Input() title: string = '';
-  @Input() formGroup!: FormGroup;
   @Input() width: string = '100%';
+  @Input() datas: string[] = [];
+  @Input() selectedValues: string[] = [];
+  @Output() checkboxClicked = new EventEmitter<string>();
   constructor() {}
-  castAbstractControlToBoolean(
-    control: AbstractControl<any, any>
-  ): FormControl<boolean> {
-    return control as FormControl<boolean>;
-  }
+
   ngOnInit(): void {
-    console.log(this.formGroup.controls);
+    console.log(this.selectedValues);
+    console.log(this.title);
+    console.log(this.datas);
   }
   handleOpenClose(): void {
     this.isOpen = !this.isOpen;
+  }
+  onCheckboxClicked(item: string): void {
+    this.checkboxClicked.emit(item);
   }
 }

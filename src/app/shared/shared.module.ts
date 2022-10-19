@@ -22,6 +22,8 @@ import { SearchItemCardComponent } from './components/cards/search-item-card/sea
 import { PercentOffBadgeComponent } from './components/badges/percent-off-badge/percent-off-badge.component';
 import { OnlyIconComponent } from './components/only-icon/only-icon.component';
 import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-input/custom-spinner-input.component';
+import { CheckoutCardComponent } from './components/cards/checkout-card/checkout-card.component';
+import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-to-cart-card.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-
     PercentOffBadgeComponent,
     OnlyIconComponent,
     CustomSpinnerInputComponent,
+    CheckoutCardComponent,
+    AddToCartCardComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -66,6 +70,8 @@ import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-
     SearchItemCardComponent,
     PercentOffBadgeComponent,
     CustomSpinnerInputComponent,
+    CheckoutCardComponent,
+    AddToCartCardComponent,
   ],
 })
 export class SharedModule {}

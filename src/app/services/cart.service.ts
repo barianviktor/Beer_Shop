@@ -42,6 +42,11 @@ export class CartService {
       content: 0.33,
     },
   ]);
+  billingOptions = {
+    vatPercent: 0.27,
+    shippingCost: 10,
+    freeShippingFrom: 500,
+  };
   constructor() {}
 
   addToCart(beer: IBeer | IBeerSearchCard, quantity: number = 1): void {
@@ -94,6 +99,30 @@ export class CartService {
       } else {
         this.removeFromCart(id);
       }
+    }
+  }
+  getItemsCost(): number {
+    let list = this.shoppingCart$.getValue();
+    let cost = 0;
+    list.forEach((beer: ISavedBeer) => {
+      cost += (beer.price! * (100 - beer.onSale) * beer.quantity) / 100;
+    });
+    console.log(cost);
+
+    return cost;
+  }
+  getShippingCost(): number {
+    return this.billingOptions.shippingCost;
+  }
+  getVatCost(): number {
+    return this.getItemsCost() * this.billingOptions.vatPercent;
+  }
+  getTotalCost(): number {
+    let cost = this.getItemsCost() + this.getVatCost() + this.getShippingCost();
+    if (cost >= this.billingOptions.freeShippingFrom) {
+      return cost - this.getShippingCost();
+    } else {
+      return cost;
     }
   }
 }

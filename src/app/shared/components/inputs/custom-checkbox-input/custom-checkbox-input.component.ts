@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-custom-checkbox-input',
@@ -7,15 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./custom-checkbox-input.component.scss'],
 })
 export class CustomCheckboxInputComponent implements OnInit {
-  @Input() text: string = 'IPA';
+  @Input() data: string = 'IPA';
   @Input() icon_path: string = 'assets/icons/check.svg';
   @Input() id: string = 'checkbox_id';
-  @Input() control: FormControl<boolean> = new FormControl<boolean>(false, {
-    nonNullable: true,
-  });
+  @Input() value: boolean = false;
+  @Output() clicked = new EventEmitter<void>();
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.control);
+  ngOnInit(): void {}
+  onHandleClick(): void {
+    this.clicked.emit();
   }
 }

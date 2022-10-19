@@ -98,12 +98,14 @@ export class BeerService {
       beer.badges = whisBeer.badges;
       beer.content = whisBeer.content;
       beer.quantity = whisBeer.quantity;
+      beer.onSale = whisBeer.onSale;
     } else if (cartBeer) {
       beer.price = cartBeer.price;
       beer.content = cartBeer.content;
       beer.badges = cartBeer.badges;
       beer.content = cartBeer.content;
       beer.quantity = cartBeer.quantity;
+      beer.onSale = cartBeer.onSale;
     } else {
       beer.badges = [];
       beer.onSale = 0;
