@@ -12,6 +12,7 @@ export class CustomSpinnerInputComponent implements OnInit {
   @Input() value: number = 1;
   @Output() incrementEmit: EventEmitter<void> = new EventEmitter();
   @Output() decrementEmit: EventEmitter<void> = new EventEmitter();
+  @Output() changeEmit: EventEmitter<number> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
@@ -20,5 +21,8 @@ export class CustomSpinnerInputComponent implements OnInit {
   }
   onDecrementClick() {
     this.decrementEmit.emit();
+  }
+  onChangedValue(event: any) {
+    this.changeEmit.emit(event.target.value);
   }
 }

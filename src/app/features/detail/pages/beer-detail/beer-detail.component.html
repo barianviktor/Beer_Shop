@@ -1,1 +1,4 @@
-<p>beer-detail works!</p>
+<div *ngIf="beer$ | async as beer">
+  {{ beer | json }}
+  <app-add-to-cart-card></app-add-to-cart-card>
+</div>

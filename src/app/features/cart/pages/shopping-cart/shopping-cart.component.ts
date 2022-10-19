@@ -23,9 +23,6 @@ export class ShoppingCartComponent implements OnInit {
           ids.push(beer.id);
         });
         return this.beerService.getMultipleBeerFromIds$(ids);
-      }),
-      tap((beers: IBeer[]) => {
-        console.log(beers);
       })
     );
   }

@@ -1,1 +1,44 @@
-<p>add-to-cart-card works!</p>
+<div class="card">
+  <div class="card-content">
+    <p>Delivery time app. 3-7 workdays</p>
+
+    <h4>Total</h4>
+    <div class="price-container">
+      <ng-container *ngIf="price">
+        <ng-container *ngIf="onSale; else elseblock">
+          <div>
+            <h2>
+              {{ (price / 100) * (100 - onSale) * quantity | currency: "EUR" }}
+            </h2>
+            <p class="annual-price">{{ price * quantity | currency: "EUR" }}</p>
+          </div>
+          <app-percent-off-badge [percent]="onSale"></app-percent-off-badge>
+        </ng-container>
+        <ng-template #elseblock>
+          <h2>{{ price * quantity | currency: "EUR" }}</h2>
+        </ng-template>
+      </ng-container>
+    </div>
+    <p>
+      prices incl. VAT plus
+      <a class="text-standard-link" [routerLink]="['/']">shipping costs</a>
+    </p>
+  </div>
+  <div class="card-actions">
+    <div class="controls-container">
+      <app-custom-spinner-input
+        [value]="quantity"
+        (decrementEmit)="decrement()"
+        (incrementEmit)="increment()"
+        (changeEmit)="onChanged($event)"
+      ></app-custom-spinner-input>
+    </div>
+    <div class="controls-container">
+      <app-primary-button
+        (buttonClicked)="handleAddToCart()"
+        [width]="'100%'"
+      ></app-primary-button>
+    </div>
+    <!--   -->
+  </div>
+</div>
