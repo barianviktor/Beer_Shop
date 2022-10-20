@@ -76,8 +76,55 @@ export class BeerService {
       })
     );
   }
-
   giveBeerBonusCredentials(beer: IBeer): IBeer {
+    beer.badges = [];
+    beer.onSale = 0;
+    beer.content = 0;
+    beer.price = 0;
+    if (beer.id % 8 == 0) {
+      //out of stock
+      beer.badges.push({
+        id: 1,
+        name: 'Sold Out',
+      });
+    } else {
+      //in stock
+      beer.price = beer.id;
+      if (beer.id % 2 == 0) {
+        beer.content = 0.5;
+      } else {
+        beer.content = 0.33;
+      }
+      if (beer.name.includes('t')) {
+        beer.onSale = 10;
+      }
+      if (beer.name.includes('e')) {
+        beer.onSale = 12;
+      }
+      if (beer.name.includes('g')) {
+        beer.onSale = 25;
+      }
+      if (beer.name.includes('r')) {
+        beer.onSale = 33;
+      }
+
+      if (beer.tagline.includes('k')) {
+        beer.badges.push({
+          id: 2,
+          name: 'New',
+        });
+      }
+      if (beer.tagline.includes('h')) {
+        beer.badges.push({
+          id: 3,
+          name: 'Product of the week',
+        });
+      }
+    }
+
+    return beer;
+  }
+  /* giveBeerBonusCredentials(beer: IBeer): IBeer {
     //price and content
 
     let whislist = this.whislistService.whistlist$.getValue();
@@ -157,7 +204,7 @@ export class BeerService {
     console.log(beer);
 
     return beer;
-  }
+  } */
 
   getRandomFloat(min: number, max: number, decimals: number) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);

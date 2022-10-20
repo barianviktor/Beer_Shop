@@ -1,41 +1,67 @@
 @use '../../../../../assets/styles/' as *;
 
 .cart-item-container{
-    width: 100%;
+    width: 98%;
+    margin:  auto;
+    border-bottom: 1px solid $greyscale-grey;
 }
+
 .items-row{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    background-color: red;
+    
     .product-container{
-        @include flex-everything-centered;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
         grid-column: 1 / 4;
-        background-color: blue;
+        padding-top: 15px;
+        .img-container{
+            height: 62px;
+            @include flex-everything-centered;
+            min-width: 85px;
+            position: relative;
+            margin-right: 30px;
+            img{
+                height: 85%
+            }
+            .button-container{
+                position: absolute;
+                right: -10px;
+                top: -10px
+            }
+        }
+        .product-details{
+            .product-name{
+                color: $primary-turquoise;
+                @include text-semi-bold;
+            }
+            
+        }
+        
     }
+
     .contributor-container{
         @include flex-everything-centered;
 
         grid-column: 4 / 6;
-        background-color: green;
     }
     .price-container{
         @include flex-everything-centered;
         grid-column: 6 / 8;
-        background-color: yellow;
 
     }
     .quantity-container{
         @include flex-everything-centered;
 
         grid-column: 8 / 11;
-        background-color: orange;
     }
     .subtotal-container{
         @include flex-everything-centered;
 
         grid-column: 11 / 13;
-        background-color: purple;
     }
 }
 .price-text{
@@ -47,12 +73,16 @@
     color: $greyscale-dark-grey;
 }
 .delete-icon-row{
-    background-color: rgb(255, 162, 162);
-    width: 100%;
+        width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     img{
 
     }
+}
+
+.detail-item-text{
+    color: $greyscale-dark-grey;
+    @include text-caption-small;
 }

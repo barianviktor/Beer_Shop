@@ -1,0 +1,16 @@
+<div class="price-container">
+  <ng-container *ngIf="price">
+    <ng-container *ngIf="onSale; else elseblock">
+      <div>
+        <h2>
+          {{ (price / 100) * (100 - onSale) * quantity | currency: "EUR" }}
+        </h2>
+        <p class="annual-price">{{ price * quantity | currency: "EUR" }}</p>
+      </div>
+      <app-percent-off-badge [percent]="onSale"></app-percent-off-badge>
+    </ng-container>
+    <ng-template #elseblock>
+      <h2>{{ price * quantity | currency: "EUR" }}</h2>
+    </ng-template>
+  </ng-container>
+</div>

@@ -1,4 +1,65 @@
 <div *ngIf="beer$ | async as beer">
-  {{ beer | json }}
-  <app-add-to-cart-card></app-add-to-cart-card>
+  <div class="item-container">
+    <div class="details-contianer">
+      <div class="image-container">
+        <div class="button-container">
+          <app-icon-only-button></app-icon-only-button>
+          <app-icon-only-button
+            (buttonClicked)="onHandleFavorite(beer.id)"
+            [icon_path]="'assets/icons/heart.svg'"
+          ></app-icon-only-button>
+        </div>
+        <img [src]="beer.image_url" alt="beer_image" />
+      </div>
+      <section class="details">
+        <div class="detail-header">
+          <div>
+            <h1>{{ beer.name }}</h1>
+            <p>{{ beer.tagline }}</p>
+          </div>
+          <app-icon-only-button
+            [icon_path]="'assets/icons/share.svg'"
+          ></app-icon-only-button>
+        </div>
+        <div class="detail-main">
+          <div class="detail-tagline">
+            {{ beer.description }}
+          </div>
+          <div class="detail-price">
+            <app-price-card
+              [price]="beer.price"
+              [onSale]="beer.onSale"
+            ></app-price-card>
+            <p class="shiping-cost">
+              Plus <a [routerLink]="['']">Shipping costs</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <app-add-to-cart-card
+      [price]="beer.price"
+      [onSale]="beer.onSale"
+      (addToCart)="onHandleCart(beer, $event)"
+    ></app-add-to-cart-card>
+  </div>
+  <div class="facts-container">
+    <h2>Beer Facts</h2>
+    <div class="item">
+      <div class="item_name">Ingredients</div>
+      <div class="item_content">{{ renderIngredients(beer.ingredients) }}</div>
+    </div>
+    <div class="item">
+      <div class="item_name">Brewery tips</div>
+      <div class="item_content">{{ beer.brewers_tips }}</div>
+    </div>
+    <div class="item">
+      <div class="item_name">ABV (% ALCOHOL)</div>
+      <div class="item_content">{{ beer.abv }}</div>
+    </div>
+    <div class="item">
+      <div class="item_name">First Brewed</div>
+      <div class="item_content">{{ beer.first_brewed }}</div>
+    </div>
+  </div>
 </div>

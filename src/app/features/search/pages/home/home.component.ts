@@ -1,15 +1,14 @@
-import { IBeer } from './../../../../interfaces/beer.interface';
-import { CartService } from './../../../../services/cart.service';
-import { WhislistService } from './../../../../services/whislist.service';
-import { BeerService } from './../../../../services/beer.service';
-import { IBeerSearchCard } from './../../../../interfaces/beer-search-card.interface';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { ISearchBeerFormInterface } from 'src/app/interfaces/searchBeerForm.interface';
-import { ISearchHopsFilterForm } from './../../../../interfaces/searchHopsFilterForm.interface';
-import { SearchService } from './../../../../services/search.service';
+import { AbstractControl, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { IBeer } from 'src/app/interfaces/beer.interface';
 import { IBeerSearchParameters } from 'src/app/interfaces/beerSearchParameters.interface';
+import { ICartItem } from 'src/app/interfaces/cartItem';
+import { IBeerSearchCard } from './../../../../interfaces/beer-search-card.interface';
+import { BeerService } from './../../../../services/beer.service';
+import { CartService } from './../../../../services/cart.service';
+import { SearchService } from './../../../../services/search.service';
+import { WhislistService } from './../../../../services/whislist.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,7 @@ import { IBeerSearchParameters } from 'src/app/interfaces/beerSearchParameters.i
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  beerCards$: Observable<IBeerSearchCard[]>;
+  beers$: Observable<IBeer[]>;
   hops: string[] = [];
   malts: string[] = [];
   beerSearchParameters: IBeerSearchParameters;
@@ -27,7 +26,8 @@ export class HomeComponent implements OnInit {
     private whislistService: WhislistService,
     private cartService: CartService
   ) {
-    this.beerCards$ = this.beerService.getBeerSearchCards$();
+    /* this.beerCards$ = this.beerService.getBeerSearchCards$(); */
+    this.beers$ = this.beerService.getBeers$();
     this.hops = this.searchService.hops;
     this.malts = this.searchService.malts;
     this.beerSearchParameters = this.searchService.searchParameters;
@@ -45,14 +45,14 @@ export class HomeComponent implements OnInit {
     console.log(this.searchBeerForm);
     console.log(this.searchService.searchBeerForm);
   } */
-  onHandleWhislist(beer: IBeerSearchCard) {
-    this.whislistService.addOrRemoveFromList(beer);
+  onHandleWhislist(id: number) {
+    this.whislistService.addOrRemoveFromList(id);
   }
   isInWhislist(id: number) {
     return this.whislistService.isInTheList(id);
   }
-  onHandleCart(cart: { beer: IBeerSearchCard; quantity: number }) {
-    this.cartService.addToCart(cart.beer, cart.quantity);
+  onHandleCart(cartItem: ICartItem) {
+    this.cartService.addToCart(cartItem);
   }
   deleteFilter(control: FormControl<boolean>) {
     control.setValue(false);

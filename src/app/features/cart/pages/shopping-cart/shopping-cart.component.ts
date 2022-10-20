@@ -4,6 +4,7 @@ import { CartService } from './../../../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { IBeer } from 'src/app/interfaces/beer.interface';
 import { ISavedBeer } from 'src/app/interfaces/savedBeer.interface';
+import { ICartItem } from 'src/app/interfaces/cartItem';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,12 +12,9 @@ import { ISavedBeer } from 'src/app/interfaces/savedBeer.interface';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
-  cartItems$: Observable<IBeer[]>;
-  constructor(
-    private cartService: CartService,
-    private beerService: BeerService
-  ) {
-    this.cartItems$ = this.cartService.shoppingCart$.pipe(
+  cartItems$: Observable<ICartItem[]>;
+  constructor(private cartService: CartService) {
+    this.cartItems$ = this.cartService.shoppingCart$; /* .pipe(
       switchMap((savedBeers: ISavedBeer[]) => {
         let ids: number[] = [];
         savedBeers.forEach((beer: ISavedBeer) => {
@@ -24,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
         });
         return this.beerService.getMultipleBeerFromIds$(ids);
       })
-    );
+    ); */
   }
 
   ngOnInit(): void {}

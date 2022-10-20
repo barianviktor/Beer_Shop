@@ -1,6 +1,3 @@
-import { ISavedBeer } from './../interfaces/savedBeer.interface';
-import { IBeerSearchCard } from './../interfaces/beer-search-card.interface';
-import { IBeer } from './../interfaces/beer.interface';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,22 +5,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class WhislistService {
-  whistlist$ = new BehaviorSubject<ISavedBeer[]>([]);
+  whistlist$ = new BehaviorSubject<number[]>([]);
   constructor() {}
-  addToList(beer: IBeer | IBeerSearchCard): void {
-    let savedBeer: ISavedBeer = {
-      ...beer,
-      quantity: 1,
-    };
+  addToList(id: number): void {
     let list = this.whistlist$.getValue();
-    list.push(savedBeer);
+    list.push(id);
     this.whistlist$.next(list);
   }
   removeFromList(id: number): void {
     let list = this.whistlist$.getValue();
     list.splice(
-      list.findIndex((beer: ISavedBeer) => {
-        return beer.id == id;
+      list.findIndex((item: number) => {
+        return item == id;
       }),
       1
     );
@@ -31,21 +24,14 @@ export class WhislistService {
   }
   isInTheList(id: number): boolean {
     let list = this.whistlist$.getValue();
-    if (list.find((beer: ISavedBeer) => beer.id == id)) {
-      return true;
-    } else {
-      return false;
-    }
+    return list.includes(id);
   }
-  findBeerInTheList(id: number): ISavedBeer | undefined {
-    let list = this.whistlist$.getValue();
-    return list.find((beer: ISavedBeer) => beer.id == id);
-  }
-  addOrRemoveFromList(beer: IBeer | IBeerSearchCard): void {
-    if (this.isInTheList(beer.id)) {
-      this.removeFromList(beer.id);
+
+  addOrRemoveFromList(id: number): void {
+    if (this.isInTheList(id)) {
+      this.removeFromList(id);
     } else {
-      this.addToList(beer);
+      this.addToList(id);
     }
   }
 }

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./add-to-cart-card.component.scss'],
 })
 export class AddToCartCardComponent implements OnInit {
-  @Input() price: number = 5;
+  @Input() price?: number = 5;
   @Input() onSale: number = 0;
   quantity: number = 1;
   @Output() addToCart = new EventEmitter<number>();

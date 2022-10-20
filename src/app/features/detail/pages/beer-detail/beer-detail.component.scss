@@ -1,0 +1,72 @@
+@use "../../../../../assets/styles/" as *;
+
+.item-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.details-contianer{
+
+    grid-column: 1/4;
+    display: flex;
+}
+.image-container{
+    height: 320px;
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    @include inline-flex-everything-centered;
+    img{
+        height: 80%;
+    }
+}
+.details{
+    width: 100%;
+    margin: 0 25px;
+  .detail-tagline{
+    margin: 16px 0;
+  }
+}
+.detail-header{
+    display: flex;
+    justify-content: space-between;
+    p{
+        color: $greyscale-dark-grey;
+    }
+    margin-bottom: 16px ;
+}
+.detail-price {
+    max-width: 300px;
+
+    margin: 16px 0;
+   .shipping-cost{
+    color: $greyscale-dark-grey;
+    @include text-caption;
+   }
+}
+.button-container{
+    display: flex;
+    position: absolute;
+    top:0;
+    right: 0;
+    padding: 10px;
+    
+}
+.facts-container{
+    margin: 32px 0;
+    display: flex;
+    gap: 32px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    .item{
+        display: grid;
+        grid-template-columns: 110px auto;
+        padding: 20px 0;
+        gap: 40px;
+        border-bottom: 1px solid $greyscale-grey;
+        .item_name{
+            color: $greyscale-dark-grey;
+            @include text-bold;
+        }
+    }
+}

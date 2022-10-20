@@ -1,0 +1,23 @@
+@use "../../../../../assets/styles/" as *;
+:host{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+.cart{
+    grid-column: 1/10;
+}
+.checkout-card-container{
+    grid-column: 10/13;
+    
+    width: 100%;
+    background-color: red;
+    margin-top: 40px;
+}
+h1{
+    margin: 16px 0;
+}
+.table-header{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+}

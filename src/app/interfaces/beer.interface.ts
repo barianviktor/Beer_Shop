@@ -7,10 +7,13 @@ export interface IBeer {
   name: string;
   contributed_by: string;
   description: string;
-  facts: {};
-  price?: number;
-  content?: number;
+  food_pairing: string[];
+  brewers_tips: string;
+  ingredients: any;
+  abv: string;
+  price: number;
+  content: number;
   onSale: number;
   badges: IBadge[];
-  quantity?: number;
+  first_brewed: string;
 }

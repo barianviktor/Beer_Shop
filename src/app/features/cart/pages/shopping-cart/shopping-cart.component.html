@@ -1,11 +1,24 @@
-<div>
-  <app-cart-item
-    *ngFor="let item of cartItems$ | async"
-    [item]="item"
-    (increaseQuantity)="onIncrementQuantity($event)"
-    (decreaseQuantity)="onDecrementQuantity($event)"
-    (removeItem)="onRemoveItem(item.id)"
-  ></app-cart-item>
+<div class="cart">
+  <h1>Shopping Cart</h1>
+  <div class="cart-items-container">
+    <div class="table-header">
+      <div class="product-header">Product</div>
+      <div class="contributor-header">Contributor</div>
+      <div class="price-header">Price</div>
+      <div class="quantity-header">Quantity</div>
+      <div class="subtotal-header">Subtotal</div>
+    </div>
+    <app-cart-item
+      *ngFor="let cartItem of cartItems$ | async"
+      [cartItem]="cartItem"
+      (increaseQuantity)="onIncrementQuantity($event)"
+      (decreaseQuantity)="onDecrementQuantity($event)"
+      (removeItem)="onRemoveItem(cartItem.item.id)"
+    ></app-cart-item>
+  </div>
+  <div class="you-may-also-like-container"></div>
+</div>
+<div class="checkout-card-container">
   <app-checkout-card
     [freeShippingFrom]="getFreeShippingFrom()"
     [shipping]="getShippingCost()"

@@ -58,12 +58,12 @@
     </div> -->
 
     <div class="search-items-container">
-      <div *ngFor="let searchCard of beerCards$ | async" class="search-item">
+      <div *ngFor="let beer of beers$ | async" class="search-item">
         <app-search-item-card
           (cartEmit)="onHandleCart($event)"
           (favouriteEmit)="onHandleWhislist($event)"
-          [beer]="searchCard"
-          [favourited]="isInWhislist(searchCard.id)"
+          [beer]="beer"
+          [favourited]="isInWhislist(beer.id)"
         ></app-search-item-card>
       </div>
     </div>

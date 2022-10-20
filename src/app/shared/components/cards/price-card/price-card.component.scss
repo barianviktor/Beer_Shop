@@ -1,4 +1,3 @@
-
 @use "../../../../../assets/styles/" as *;
 
 .price-container{
@@ -18,22 +17,4 @@
     @include text-caption;
     color: $greyscale-dark-grey;
     margin: 0 6px;
-}
-.card{
-    padding: 8px;
-    background-color: $greyscale-very-light-grey;
-}
-.card-actions{
-    padding: 0 16px ;
-}
-.card-content{
-
-    padding: 16px ;
-   h4{
-    padding-top: 16px;
-   }
-}
-.controls-container{
-    width: 100%;
-    margin: 16px 0;
 }

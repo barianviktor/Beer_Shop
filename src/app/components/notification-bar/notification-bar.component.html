@@ -1,0 +1,37 @@
+<div class="notification-container">
+  <ng-container *ngIf="notifications$ | async as notification">
+    <ng-container *ngIf="notification">
+      <ng-container *ngIf="notification.status == 'SUCCESS'; else elseblock">
+        <div class="success notification">
+          <p>
+            {{ notification.message }}
+            <a
+              class="link"
+              *ngIf="notification.link as link"
+              [routerLink]="[link.linkTo]"
+              >{{ link.message }}</a
+            >
+          </p>
+
+          <img [src]="'assets/icons/cross.svg'" (click)="closeNotification()" />
+        </div>
+      </ng-container>
+
+      <ng-template #elseblock>
+        <div class="failure notification">
+          <p>
+            {{ notification.message }}
+            <a
+              class="link"
+              *ngIf="notification.link as link"
+              [routerLink]="[link.linkTo]"
+              >{{ link.message }}</a
+            >
+          </p>
+
+          <img [src]="'assets/icons/cross.svg'" (click)="closeNotification()" />
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</div>

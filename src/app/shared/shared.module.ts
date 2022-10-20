@@ -24,6 +24,7 @@ import { OnlyIconComponent } from './components/only-icon/only-icon.component';
 import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-input/custom-spinner-input.component';
 import { CheckoutCardComponent } from './components/cards/checkout-card/checkout-card.component';
 import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-to-cart-card.component';
+import { PriceCardComponent } from './components/cards/price-card/price-card.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-
     CustomSpinnerInputComponent,
     CheckoutCardComponent,
     AddToCartCardComponent,
+    PriceCardComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -72,6 +74,7 @@ import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-
     CustomSpinnerInputComponent,
     CheckoutCardComponent,
     AddToCartCardComponent,
+    PriceCardComponent,
   ],
 })
 export class SharedModule {}

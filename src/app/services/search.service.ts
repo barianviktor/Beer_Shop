@@ -1,9 +1,6 @@
-import { SearchBeerForm } from 'src/app/interfaces/SearchBeerForm';
-import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { ISearchBeerFormInterface } from '../interfaces/searchBeerForm.interface';
-import { IBeerSearchParameters } from '../interfaces/beerSearchParameters.interface';
 import { BeerSearchParameters } from '../interfaces/BeerSearchParameters';
+import { IBeerSearchParameters } from '../interfaces/beerSearchParameters.interface';
 
 @Injectable({
   providedIn: 'root',

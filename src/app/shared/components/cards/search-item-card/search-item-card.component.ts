@@ -1,7 +1,7 @@
-import { ISavedBeer } from './../../../../interfaces/savedBeer.interface';
 import { FormControl } from '@angular/forms';
-import { IBeerSearchCard } from 'src/app/interfaces/beer-search-card.interface';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { IBeer } from 'src/app/interfaces/beer.interface';
+import { ICartItem } from 'src/app/interfaces/cartItem';
 
 @Component({
   selector: 'app-search-item-card',
@@ -9,26 +9,23 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./search-item-card.component.scss'],
 })
 export class SearchItemCardComponent implements OnInit {
-  @Input() beer!: IBeerSearchCard;
+  @Input() beer!: IBeer;
   @Input() favourited: boolean = false;
   quantityControl = new FormControl<number>(1, { nonNullable: true });
 
-  @Output() favouriteEmit = new EventEmitter<IBeerSearchCard>();
-  @Output() cartEmit = new EventEmitter<{
-    beer: IBeerSearchCard;
-    quantity: number;
-  }>();
+  @Output() favouriteEmit = new EventEmitter<number>();
+  @Output() cartEmit = new EventEmitter<ICartItem>();
   constructor() {}
 
   ngOnInit(): void {}
 
   onHearthClick(): void {
-    this.favouriteEmit.emit(this.beer);
+    this.favouriteEmit.emit(this.beer.id);
   }
   onCartClick(): void {
     this.cartEmit.emit({
-      beer: this.beer,
-      quantity: +this.quantityControl.value,
+      item: this.beer,
+      quantity: this.quantityControl.value,
     });
   }
 }

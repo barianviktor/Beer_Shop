@@ -1,45 +1,35 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { IBeerSearchCard } from '../interfaces/beer-search-card.interface';
+import { ICartItem } from '../interfaces/cartItem';
 import { IBeer } from './../interfaces/beer.interface';
 import { ISavedBeer } from './../interfaces/savedBeer.interface';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  shoppingCart$ = new BehaviorSubject<ISavedBeer[]>([
+  shoppingCart$ = new BehaviorSubject<ICartItem[]>([
     {
-      id: 1,
-      onSale: 0,
-      quantity: 2,
-      badges: [],
-      price: 5.2,
-      content: 0.5,
-    },
-    {
-      id: 2,
-      onSale: 0,
       quantity: 1,
-      badges: [],
-      price: 3,
-      content: 0.5,
-    },
-    {
-      id: 3,
-      onSale: 2,
-      quantity: 4,
-      badges: [],
-      price: 5,
-      content: 0.66,
-    },
-    {
-      id: 4,
-      onSale: 15,
-      quantity: 1,
-      badges: [],
-      price: 12,
-      content: 0.33,
+      item: {
+        abv: '',
+        badges: [],
+        brewers_tips: '',
+        content: 1,
+        contributed_by: 'dsadsa',
+        description: '',
+        first_brewed: '',
+        food_pairing: [],
+        id: 1,
+        ingredients: '',
+        image_url: 'https://images.punkapi.com/v2/2.png',
+        name: 'Trashy Blonde',
+        onSale: 2,
+        price: 2,
+        tagline: '',
+      },
     },
   ]);
   billingOptions = {
@@ -47,43 +37,46 @@ export class CartService {
     shippingCost: 10,
     freeShippingFrom: 500,
   };
-  constructor() {}
+  constructor(private notificationService: NotificationService) {}
 
-  addToCart(beer: IBeer | IBeerSearchCard, quantity: number = 1): void {
+  addToCart(cartItem: ICartItem): void {
     let list = this.shoppingCart$.getValue();
-
-    if (this.isInTheList(beer.id)) {
-      this.increaseQuantity(beer.id, quantity);
+    if (this.isInTheList(cartItem.item.id)) {
+      this.increaseQuantity(cartItem.item.id, cartItem.quantity);
     } else {
-      list.push({
-        ...beer,
-        quantity: quantity,
-      });
+      list.push(cartItem);
     }
+
+    this.notificationService.successNotification(
+      'You added ' + cartItem.item.name + ' in ',
+      {
+        message: 'your cart',
+        linkTo: 'shopping-cart',
+      }
+    );
+    console.log(this.shoppingCart$.getValue());
 
     this.shoppingCart$.next(list);
   }
   removeFromCart(id: number): void {
     let list = this.shoppingCart$.getValue();
     list.splice(
-      list.findIndex((beer: ISavedBeer) => beer.id == id),
+      list.findIndex((cartItem: ICartItem) => cartItem.item.id == id),
       1
     );
     this.shoppingCart$.next(list);
   }
   isInTheList(id: number): boolean {
     let list = this.shoppingCart$.getValue();
-    if (list.find((beer: ISavedBeer) => beer.id == id)) {
+    if (list.findIndex((cartItem: ICartItem) => cartItem.item.id == id) >= 0) {
       return true;
     } else {
       return false;
     }
   }
   increaseQuantity(id: number, quantity: number = 1): void {
-    console.log('increaseQuantity');
-
     let list = this.shoppingCart$.getValue();
-    let beer = list.find((beer: ISavedBeer) => beer.id == id);
+    let beer = list.find((cartItem: ICartItem) => cartItem.item.id == id);
     if (beer) {
       beer.quantity = beer.quantity + quantity;
       this.shoppingCart$.next(list);
@@ -91,7 +84,7 @@ export class CartService {
   }
   decreaseQuantity(id: number, quantity: number = 1): void {
     let list = this.shoppingCart$.getValue();
-    let beer = list.find((beer: ISavedBeer) => beer.id == id);
+    let beer = list.find((cartItem: ICartItem) => cartItem.item.id == id);
     if (beer) {
       if (beer.quantity - quantity > 0) {
         beer.quantity = beer.quantity - quantity;
@@ -104,8 +97,12 @@ export class CartService {
   getItemsCost(): number {
     let list = this.shoppingCart$.getValue();
     let cost = 0;
-    list.forEach((beer: ISavedBeer) => {
-      cost += (beer.price! * (100 - beer.onSale) * beer.quantity) / 100;
+    list.forEach((cartItem: ICartItem) => {
+      cost +=
+        (cartItem.item.price *
+          (100 - cartItem.item.onSale) *
+          cartItem.quantity) /
+        100;
     });
     console.log(cost);
 

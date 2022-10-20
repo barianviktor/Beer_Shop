@@ -3,6 +3,7 @@ import { ISavedBeer } from './../../interfaces/savedBeer.interface';
 import { Observable } from 'rxjs';
 import { WhislistService } from './../../services/whislist.service';
 import { Component, OnInit } from '@angular/core';
+import { ICartItem } from 'src/app/interfaces/cartItem';
 
 @Component({
   selector: 'app-navigation',
@@ -10,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  whisList$: Observable<ISavedBeer[]>;
-  cart$: Observable<ISavedBeer[]>;
+  whisList$: Observable<number[]>;
+  cart$: Observable<ICartItem[]>;
   constructor(
     private whislistService: WhislistService,
     private cartService: CartService

@@ -3,6 +3,9 @@ import { BeerService } from './../../../../services/beer.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { IBeer } from 'src/app/interfaces/beer.interface';
+import { CartService } from 'src/app/services/cart.service';
+import { ICartItem } from 'src/app/interfaces/cartItem';
+import { WhislistService } from 'src/app/services/whislist.service';
 
 @Component({
   selector: 'app-beer-detail',
@@ -14,7 +17,9 @@ export class BeerDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private beerService: BeerService
+    private beerService: BeerService,
+    private cartService: CartService,
+    private whislistService: WhislistService
   ) {
     this.beer$ = this.route.params.pipe(
       switchMap((params: Params) => this.beerService.getBeer$(params['id'])),
@@ -24,6 +29,33 @@ export class BeerDetailComponent implements OnInit {
       })
     );
   }
-
+  onHandleFavorite(id: number) {
+    this.whislistService.addOrRemoveFromList(id);
+  }
+  onHandleCart(beer: IBeer, quantity: number) {
+    console.log(quantity);
+    let cartItem: ICartItem = {
+      item: beer,
+      quantity: quantity,
+    };
+    this.cartService.addToCart(cartItem);
+  }
   ngOnInit(): void {}
+  renderIngredients(ingredients: any): string {
+    let listed_ingredients: string[] = [];
+    ingredients.hops.forEach((item: any) => {
+      if (!listed_ingredients.includes(item.name)) {
+        listed_ingredients.push(item.name);
+      }
+    });
+    ingredients.malt.forEach((item: any) => {
+      if (!listed_ingredients.includes(item.name)) {
+        listed_ingredients.push(item.name);
+      }
+    });
+    if (!listed_ingredients.includes(ingredients.yeast)) {
+      listed_ingredients.push(ingredients.yeast);
+    }
+    return listed_ingredients.join(' ');
+  }
 }

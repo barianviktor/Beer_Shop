@@ -9,8 +9,9 @@ import { DummyModule } from './features/dummy/dummy.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { NotificationBarComponent } from './components/notification-bar/notification-bar.component';
 @NgModule({
-  declarations: [AppComponent, NavigationComponent],
+  declarations: [AppComponent, NavigationComponent, NotificationBarComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

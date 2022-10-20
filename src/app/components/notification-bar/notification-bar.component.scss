@@ -1,0 +1,22 @@
+@use "../../../assets/styles/" as *;
+
+.notification-container{
+    min-height: 50px;
+}
+.notification{
+    width: 100%;
+    padding: 8px 16px;
+    @include text-caption;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img{
+        cursor: pointer;
+    }
+}
+.success{
+    background-color: $functional-success-green2;
+}
+.failure {
+    background-color: $functional-warning-error;
+}

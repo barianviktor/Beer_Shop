@@ -1,6 +1,7 @@
 import { IBeer } from 'src/app/interfaces/beer.interface';
 import { ISavedBeer } from './../../../../interfaces/savedBeer.interface';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICartItem } from 'src/app/interfaces/cartItem';
 
 @Component({
   selector: 'app-cart-item',
@@ -8,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./cart-item.component.scss'],
 })
 export class CartItemComponent implements OnInit {
-  @Input() item!: IBeer;
+  @Input() cartItem!: ICartItem;
   @Output() increaseQuantity = new EventEmitter<number>();
   @Output() decreaseQuantity = new EventEmitter<number>();
   @Output() removeItem = new EventEmitter<void>();
@@ -16,7 +17,10 @@ export class CartItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.item);
+    console.log(this.cartItem);
+  }
+  addToWhislist() {
+    this.whislistEmitter.emit();
   }
   deleteItem() {
     this.removeItem.emit();
@@ -24,9 +28,9 @@ export class CartItemComponent implements OnInit {
   onIncrementClick() {
     console.log('increment');
 
-    this.increaseQuantity.emit(this.item.id);
+    this.increaseQuantity.emit(this.cartItem.item.id);
   }
   onDecrementClick() {
-    this.decreaseQuantity.emit(this.item.id);
+    this.decreaseQuantity.emit(this.cartItem.item.id);
   }
 }

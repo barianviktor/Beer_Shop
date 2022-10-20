@@ -1,30 +1,50 @@
 <div class="cart-item-container">
   <div class="items-row">
-    <div class="product-container">product</div>
+    <div class="product-container">
+      <div class="img-container">
+        <div class="button-container">
+          <app-icon-only-button
+            (buttonClicked)="addToWhislist()"
+            [icon_path]="'assets/icons/heart.svg'"
+          >
+          </app-icon-only-button>
+        </div>
+        <img [src]="cartItem.item.image_url" alt="cart item image" />
+      </div>
+      <div class="product-details">
+        <p class="product-name">
+          {{ cartItem.item.name }}
+        </p>
+        <p class="detail-item-text">Product-No.: {{ cartItem.item.id }}</p>
+      </div>
+    </div>
     <div class="contributor-container">
-      <p>{{ item.contributed_by }}</p>
+      <p class="detail-item-text">{{ cartItem.item.contributed_by }}</p>
     </div>
     <div class="price-container">
       <div>
         <p class="price-text">
-          {{ (item.price! * (100 - item.onSale)) / 100 | currency: "EUR" }}
+          {{
+            (cartItem.item.price * (100 - cartItem.item.onSale)) / 100
+              | currency: "EUR"
+          }}
         </p>
         <p class="vat-text">Excl. VAT</p>
       </div>
     </div>
     <div class="quantity-container">
       <app-custom-spinner-input
-        [value]="item.quantity!"
+        [value]="cartItem.quantity"
         (decrementEmit)="onDecrementClick()"
         (incrementEmit)="onIncrementClick()"
       ></app-custom-spinner-input>
     </div>
     <div class="subtotal-container">
-      <div *ngIf="item.price && item.quantity">
+      <div *ngIf="cartItem.item.price && cartItem.quantity">
         <p class="price-text">
           {{
-            ((item.price! * (100 - item.onSale)) / 100) * item.quantity
-              | currency: "EUR"
+            ((cartItem.item.price * (100 - cartItem.item.onSale)) / 100) *
+              cartItem.quantity | currency: "EUR"
           }}
         </p>
         <p class="vat-text">Excl. VAT</p>
