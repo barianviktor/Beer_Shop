@@ -10,6 +10,7 @@ import { ICartItem } from 'src/app/interfaces/cartItem';
 })
 export class CartItemComponent implements OnInit {
   @Input() cartItem!: ICartItem;
+  @Input() favorited: boolean = false;
   @Output() increaseQuantity = new EventEmitter<number>();
   @Output() decreaseQuantity = new EventEmitter<number>();
   @Output() removeItem = new EventEmitter<void>();

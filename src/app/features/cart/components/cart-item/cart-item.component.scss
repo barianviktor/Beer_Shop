@@ -1,7 +1,7 @@
 @use '../../../../../assets/styles/' as *;
 
 .cart-item-container{
-    width: 98%;
+    width: 100%;
     margin:  auto;
     border-bottom: 1px solid $greyscale-grey;
 }
@@ -13,11 +13,11 @@
     
     .product-container{
         display: flex;
-        width: 100%;
         align-items: center;
-        justify-content: flex-start;
         grid-column: 1 / 4;
         padding-top: 15px;
+        gap: 10px;
+
         .img-container{
             height: 62px;
             @include flex-everything-centered;
@@ -38,29 +38,46 @@
                 color: $primary-turquoise;
                 @include text-semi-bold;
             }
-            
+            padding: 8px;
         }
-        
-    }
 
+    }
+    .annual-price{
+        font-size: 14px;
+        text-decoration: line-through
+    
+    }
+    .prices{
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
     .contributor-container{
-        @include flex-everything-centered;
+        display: flex;
+        align-items: center;
+        padding: 8px;
 
         grid-column: 4 / 6;
     }
     .price-container{
-        @include flex-everything-centered;
+        display: flex;
+        align-items: center;
         grid-column: 6 / 8;
+        padding: 8px;
 
     }
     .quantity-container{
-        @include flex-everything-centered;
+        display: flex;
+        align-items: center;
+        padding: 8px;
 
         grid-column: 8 / 11;
     }
     .subtotal-container{
-        @include flex-everything-centered;
+        padding: 8px;
 
+        display: flex;
+        align-items: center;
         grid-column: 11 / 13;
     }
 }

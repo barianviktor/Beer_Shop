@@ -3,7 +3,6 @@
     <div class="icons-badges-container">
       <div class="badges">
         <app-sale-badge *ngIf="beer.onSale"></app-sale-badge>
-
         <ng-container *ngFor="let badge of beer.badges">
           <ng-container [ngSwitch]="badge.name">
             <app-new-badge *ngSwitchCase="'New'"></app-new-badge>
@@ -20,27 +19,34 @@
           [color]="'red'"
           [icon_name]="'assets/icons/heart.svg'"
         ></app-only-icon> -->
-        <app-icon-only-button
+        <!-- <app-icon-only-button
           (buttonClicked)="onHearthClick()"
           [icon_path]="'assets/icons/heart.svg'"
-        ></app-icon-only-button>
+        ></app-icon-only-button> -->
+        <app-custom-icon
+          (click)="onHearthClick()"
+          [icon_class]="
+            'icon favorite_icon  ' + (favorited ? 'active_favorite_icon' : '')
+          "
+          [icon_path]="'assets/icons/heart.svg'"
+        ></app-custom-icon>
       </div>
     </div>
-    <a [routerLink]="['beer', beer.id]" class="image-container">
+    <a [routerLink]="['/beer', beer.id]" class="image-container">
       <img [src]="beer.image_url" alt="" />
     </a>
   </div>
   <div class="product-main">
     <div class="discription-container">
       <p class="tagline-text">{{ beer.contributed_by }}</p>
-      <a [routerLink]="['beer', beer.id]">
+      <a [routerLink]="['/beer', beer.id]">
         <h5 class="name-text">{{ beer.name }}</h5>
       </a>
       <p class="tagline-text">{{ beer.tagline }}</p>
     </div>
   </div>
   <div class="product-footer">
-    <div class="price-container">
+    <!--  <div class="price-container">
       <ng-container *ngIf="beer.price">
         <ng-container *ngIf="beer.onSale; else elseblock">
           <div>
@@ -57,7 +63,11 @@
           <h2>{{ beer.price | currency: "EUR" }}</h2>
         </ng-template>
       </ng-container>
-    </div>
+    </div> -->
+    <app-price-card
+      [price]="beer.price"
+      [onSale]="beer.onSale"
+    ></app-price-card>
     <div class="content-container">
       <ng-container *ngIf="beer.content">
         <span>Content</span>

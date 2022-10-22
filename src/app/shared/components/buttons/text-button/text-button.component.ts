@@ -11,6 +11,7 @@ export class TextButtonComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() width: string = 'auto';
   @Input() borderRadius: string = '4px';
+  @Input() type: string = 'button';
   constructor() {}
 
   ngOnInit(): void {}

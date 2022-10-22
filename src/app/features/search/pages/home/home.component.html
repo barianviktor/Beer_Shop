@@ -1,69 +1,61 @@
 <div class="search-page">
-  <div class="paggination"></div>
   <h1>All Beers</h1>
-  <!--   <div class="filters-container">
+  <div class="filters-container">
     <app-search-filter-container
-      [formGroup]="hops"
+      [datas]="hops"
       [title]="'Hops'"
-    ></app-search-filter-container>
+      [width]="'100%'"
+      [selectedValue]="beerSearchParameters.hops"
+      (checkboxClicked)="onHandleHops($event)"
+    >
+    </app-search-filter-container>
     <app-search-filter-container
-      [formGroup]="malts"
+      [datas]="malts"
       [title]="'Malts'"
+      [width]="'100%'"
+      [selectedValue]="beerSearchParameters.malts"
+      (checkboxClicked)="onHandleMalts($event)"
     ></app-search-filter-container>
     <app-search-filter-alcohol-range
-      (setAlcoholRange)="onSetAlcoholRange($event)"
-    ></app-search-filter-alcohol-range>
+      (setAlcoholRange)="onHandleAlcoholRange($event)"
+      [abv_lt]="beerSearchParameters.abv_lt"
+      [abv_gt]="beerSearchParameters.abv_gt"
+    >
+    </app-search-filter-alcohol-range>
     <div class="button-container">
       <app-secondary-button
         (buttonClicked)="onResetToDefault()"
         [text]="'Reset to default'"
       ></app-secondary-button>
     </div>
-  </div> -->
-  <div class="filters-containers">
-    <app-search-filter-container
-      [datas]="hops"
-      [title]="'Hops'"
-      [width]="'100%'"
-      [selectedValues]="beerSearchParameters.hops"
-      (checkboxClicked)="onHandleHopsCheckbox($event)"
-    >
-    </app-search-filter-container>
   </div>
+
   <section class="main-content">
-    <!-- <div class="active-filters-container">
+    <div class="active-filters-container">
       <p class="text">Active Filters</p>
       <div class="active-filters">
-        <ng-container *ngFor="let control of hops.controls | keyvalue">
-          <app-filter-tag
-            class="item"
-            *ngIf="control.value.value"
-            [text]="control.key"
-            (iconClicked)="
-              deleteFilter(castAbsContToFormContBool(control.value))
-            "
-          ></app-filter-tag>
-        </ng-container>
-        <ng-container *ngFor="let control of malts.controls | keyvalue">
-          <app-filter-tag
-            class="item"
-            *ngIf="control.value.value"
-            [text]="control.key"
-            (iconClicked)="
-              deleteFilter(castAbsContToFormContBool(control.value))
-            "
-          ></app-filter-tag>
-        </ng-container>
+        <app-filter-tag
+          *ngIf="beerSearchParameters.hops as hops"
+          class="item"
+          [text]="hops"
+          (iconClicked)="onHandleHops(hops)"
+        ></app-filter-tag>
+        <app-filter-tag
+          *ngIf="beerSearchParameters.malts as malts"
+          class="item"
+          [text]="malts"
+          (iconClicked)="onHandleMalts(malts)"
+        ></app-filter-tag>
       </div>
-    </div> -->
+    </div>
 
     <div class="search-items-container">
       <div *ngFor="let beer of beers$ | async" class="search-item">
         <app-search-item-card
           (cartEmit)="onHandleCart($event)"
-          (favouriteEmit)="onHandleWhislist($event)"
+          (favoriteEmit)="onHandleWhislist($event)"
           [beer]="beer"
-          [favourited]="isInWhislist(beer.id)"
+          [favorited]="isInWhislist(beer.id)"
         ></app-search-item-card>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -7,17 +7,28 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./custom-searchbar-input.component.scss'],
 })
 export class CustomSearchbarInputComponent implements OnInit {
-  @Input() control: FormControl<string> = new FormControl<string>('', {
-    nonNullable: true,
+  searchInputGroup: FormGroup = new FormGroup({
+    name: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
   });
+  get name(): FormControl {
+    return this.searchInputGroup.get('name') as FormControl;
+  }
+  @Input() searchParamName: string = '';
   @Input() placeholder: string = 'Search for a beer...';
   @Input() icon_path: string = 'assets/icons/search.svg';
   @Input() width: string = '100%';
-  @Output() searchEmitter = new EventEmitter<void>();
+  @Output() searchEmitter = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.name.setValue(this.searchParamName);
+  }
   onSearch() {
-    this.searchEmitter.emit();
+    if (this.searchInputGroup.valid) {
+      this.searchEmitter.emit(this.name.value);
+    }
   }
 }

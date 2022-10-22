@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { WhislistService } from './../../services/whislist.service';
 import { Component, OnInit } from '@angular/core';
 import { ICartItem } from 'src/app/interfaces/cartItem';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-navigation',
@@ -15,12 +16,15 @@ export class NavigationComponent implements OnInit {
   cart$: Observable<ICartItem[]>;
   constructor(
     private whislistService: WhislistService,
-    private cartService: CartService
+    private cartService: CartService,
+    private searchService: SearchService
   ) {
     this.whisList$ = this.whislistService.whistlist$;
     this.cart$ = this.cartService.shoppingCart$;
   }
-
+  onSearch(search: string): void {
+    this.searchService.onHandleSearchName(search);
+  }
   ngOnInit(): void {}
   goTo(path: string) {}
 }

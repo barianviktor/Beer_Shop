@@ -5,19 +5,67 @@
 }
 .cart{
     grid-column: 1/10;
+
 }
 .checkout-card-container{
     grid-column: 10/13;
-    
+    padding-top: 100px;
     width: 100%;
-    background-color: red;
-    margin-top: 40px;
 }
 h1{
     margin: 16px 0;
 }
+.cart-items-container{
+    width: 97%;
+}
+
 .table-header{
     display: grid;
     width: 100%;
     grid-template-columns: repeat(12, 1fr);
+    background-color: $greyscale-very-light-grey;
+    @include text-bold;
+    padding: 5px ;
+    gap: 10px;
+    .product-header{
+
+        display: flex;
+        align-items: center;
+        grid-column: 1 / 4;
+    }
+    .contributor-header{
+        display: flex;
+        align-items: center;
+        grid-column: 4 / 6;
+    }
+    .price-header{
+        display: flex;
+        align-items: center;
+        grid-column: 6 / 8;
+    }
+    .quantity-header{
+        display: flex;
+        align-items: center;
+        grid-column: 8 / 11;
+    }
+    .subtotal-header{
+        display: flex;
+        align-items: center;
+        grid-column: 11 / 13;
+    }
+}
+.recently-viewed-items{
+    width: 100%;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-around;
+    margin: 16px auto;
+    .item{
+        display: inline-block;
+        width: 30%;
+    }
+}
+h3{
+    padding: 16px 0;
 }

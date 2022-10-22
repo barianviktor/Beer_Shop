@@ -3,11 +3,13 @@
     <div class="product-container">
       <div class="img-container">
         <div class="button-container">
-          <app-icon-only-button
-            (buttonClicked)="addToWhislist()"
+          <app-custom-icon
+            (click)="addToWhislist()"
+            [icon_class]="
+              'icon favorite_icon  ' + (favorited ? 'active_favorite_icon' : '')
+            "
             [icon_path]="'assets/icons/heart.svg'"
-          >
-          </app-icon-only-button>
+          ></app-custom-icon>
         </div>
         <img [src]="cartItem.item.image_url" alt="cart item image" />
       </div>
@@ -23,12 +25,18 @@
     </div>
     <div class="price-container">
       <div>
-        <p class="price-text">
-          {{
-            (cartItem.item.price * (100 - cartItem.item.onSale)) / 100
-              | currency: "EUR"
-          }}
-        </p>
+        <div class="prices">
+          <p class="price-text">
+            {{
+              (cartItem.item.price * (100 - cartItem.item.onSale)) / 100
+                | currency: "EUR"
+            }}
+          </p>
+          <p class="annual-price" *ngIf="cartItem.item.onSale">
+            {{ cartItem.item.price | currency: "EUR" }}
+          </p>
+        </div>
+
         <p class="vat-text">Excl. VAT</p>
       </div>
     </div>
@@ -41,12 +49,17 @@
     </div>
     <div class="subtotal-container">
       <div *ngIf="cartItem.item.price && cartItem.quantity">
-        <p class="price-text">
-          {{
-            ((cartItem.item.price * (100 - cartItem.item.onSale)) / 100) *
-              cartItem.quantity | currency: "EUR"
-          }}
-        </p>
+        <div class="prices">
+          <p class="price-text">
+            {{
+              ((cartItem.item.price * (100 - cartItem.item.onSale)) / 100) *
+                cartItem.quantity | currency: "EUR"
+            }}
+          </p>
+          <p class="annual-price" *ngIf="cartItem.item.onSale">
+            {{ cartItem.item.price * cartItem.quantity | currency: "EUR" }}
+          </p>
+        </div>
         <p class="vat-text">Excl. VAT</p>
       </div>
     </div>

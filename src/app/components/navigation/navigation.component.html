@@ -20,6 +20,8 @@
       <div class="controls">
         <div class="search-container">
           <app-custom-searchbar-input
+            (searchEmitter)="onSearch($event)"
+            [searchParamName]="''"
             [width]="'100%'"
           ></app-custom-searchbar-input>
         </div>

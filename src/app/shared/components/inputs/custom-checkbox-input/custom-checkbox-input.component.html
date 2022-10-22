@@ -1,4 +1,9 @@
-<div (click)="onHandleClick()" tabindex="0" class="checkbox-container">
-  <input [id]="id" type="checkbox" [value]="value" />
+<div tabindex="0" class="checkbox-container">
+  <input
+    (change)="onHandleClick()"
+    [id]="id"
+    type="checkbox"
+    [checked]="value"
+  />
   <label [for]="id">{{ data }}</label>
 </div>

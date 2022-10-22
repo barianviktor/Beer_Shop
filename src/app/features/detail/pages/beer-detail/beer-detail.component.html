@@ -4,10 +4,14 @@
       <div class="image-container">
         <div class="button-container">
           <app-icon-only-button></app-icon-only-button>
-          <app-icon-only-button
-            (buttonClicked)="onHandleFavorite(beer.id)"
+          <app-custom-icon
+            (click)="onHandleFavorite(beer.id)"
+            [icon_class]="
+              'icon favorite_icon  ' +
+              (isInWhislist(beer.id) ? 'active_favorite_icon' : '')
+            "
             [icon_path]="'assets/icons/heart.svg'"
-          ></app-icon-only-button>
+          ></app-custom-icon>
         </div>
         <img [src]="beer.image_url" alt="beer_image" />
       </div>

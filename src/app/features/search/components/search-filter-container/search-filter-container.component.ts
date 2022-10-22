@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-filter-container',
@@ -11,15 +10,11 @@ export class SearchFilterContainerComponent implements OnInit {
   @Input() title: string = '';
   @Input() width: string = '100%';
   @Input() datas: string[] = [];
-  @Input() selectedValues: string[] = [];
+  @Input() selectedValue?: string;
   @Output() checkboxClicked = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.selectedValues);
-    console.log(this.title);
-    console.log(this.datas);
-  }
+  ngOnInit(): void {}
   handleOpenClose(): void {
     this.isOpen = !this.isOpen;
   }

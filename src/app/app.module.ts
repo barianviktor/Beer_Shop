@@ -16,11 +16,11 @@ import { NotificationBarComponent } from './components/notification-bar/notifica
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    DummyModule,
     SharedModule,
+    /*     DummyModule,
     SearchModule,
     DetailModule,
-    CartModule,
+    CartModule, */
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,10 +12,9 @@
       <app-custom-checkbox-input
         [data]="data"
         [id]="data + '_input_checkbox'"
-        [value]="selectedValues.includes(data)"
-        (click)="onCheckboxClicked(data)"
+        [value]="selectedValue == data"
+        (clicked)="onCheckboxClicked($event)"
       ></app-custom-checkbox-input>
-      <button (click)="onCheckboxClicked(data)">{{ data }}</button>
     </div>
   </div>
 </div>

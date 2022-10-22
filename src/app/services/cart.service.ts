@@ -54,7 +54,6 @@ export class CartService {
         linkTo: 'shopping-cart',
       }
     );
-    console.log(this.shoppingCart$.getValue());
 
     this.shoppingCart$.next(list);
   }
@@ -104,7 +103,6 @@ export class CartService {
           cartItem.quantity) /
         100;
     });
-    console.log(cost);
 
     return cost;
   }

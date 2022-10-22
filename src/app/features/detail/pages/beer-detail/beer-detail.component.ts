@@ -1,4 +1,4 @@
-import { catchError, Observable, of, switchMap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { BeerService } from './../../../../services/beer.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { IBeer } from 'src/app/interfaces/beer.interface';
 import { CartService } from 'src/app/services/cart.service';
 import { ICartItem } from 'src/app/interfaces/cartItem';
 import { WhislistService } from 'src/app/services/whislist.service';
+import { RecentItemsService } from 'src/app/services/recent-items.service';
 
 @Component({
   selector: 'app-beer-detail',
@@ -19,18 +20,23 @@ export class BeerDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private beerService: BeerService,
     private cartService: CartService,
-    private whislistService: WhislistService
+    private whislistService: WhislistService,
+    private recentItemsService: RecentItemsService
   ) {
     this.beer$ = this.route.params.pipe(
       switchMap((params: Params) => this.beerService.getBeer$(params['id'])),
       catchError((err) => {
         this.router.navigate(['/']);
         throw err;
-      })
+      }),
+      tap((beer: IBeer) => this.recentItemsService.addNewRecentItem(beer.id))
     );
   }
   onHandleFavorite(id: number) {
     this.whislistService.addOrRemoveFromList(id);
+  }
+  isInWhislist(id: number): boolean {
+    return this.whislistService.isInTheList(id);
   }
   onHandleCart(beer: IBeer, quantity: number) {
     console.log(quantity);

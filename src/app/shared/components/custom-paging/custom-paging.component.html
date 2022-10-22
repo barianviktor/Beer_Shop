@@ -1,0 +1,17 @@
+<div class="paginator-container">
+  <button [disabled]="currentValue == dots[0]" (click)="onSetPrevious()">
+    <img src="assets/icons/arrow-left.svg" alt="" />
+  </button>
+  <div
+    class="item"
+    (click)="onSetValue(value)"
+    [ngClass]="{ active: value === currentValue }"
+    *ngFor="let value of dots"
+  ></div>
+  <button
+    [disabled]="currentValue == dots[dots.length - 1]"
+    (click)="onSetNext()"
+  >
+    <img src="assets/icons/arrow-right.svg" alt="" />
+  </button>
+</div>

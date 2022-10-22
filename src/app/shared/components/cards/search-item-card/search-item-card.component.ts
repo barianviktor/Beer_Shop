@@ -10,17 +10,17 @@ import { ICartItem } from 'src/app/interfaces/cartItem';
 })
 export class SearchItemCardComponent implements OnInit {
   @Input() beer!: IBeer;
-  @Input() favourited: boolean = false;
+  @Input() favorited: boolean = false;
   quantityControl = new FormControl<number>(1, { nonNullable: true });
 
-  @Output() favouriteEmit = new EventEmitter<number>();
+  @Output() favoriteEmit = new EventEmitter<number>();
   @Output() cartEmit = new EventEmitter<ICartItem>();
   constructor() {}
 
   ngOnInit(): void {}
 
   onHearthClick(): void {
-    this.favouriteEmit.emit(this.beer.id);
+    this.favoriteEmit.emit(this.beer.id);
   }
   onCartClick(): void {
     this.cartEmit.emit({

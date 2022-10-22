@@ -36,3 +36,9 @@
 .fliped{
     transform: rotate(180deg);
 }
+
+.error-container{
+    @include text-caption-small;
+    text-align: center;
+    color:$functional-warning-error
+}

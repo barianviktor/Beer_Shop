@@ -7,29 +7,40 @@
       alt="arrow-icon"
     />
   </div>
-  <div [ngClass]="{ open: isOpen, closed: !isOpen }" class="filter-section">
-    <div class="item">
-      <app-custom-text-input
-        [type]="'number'"
-        [width]="'92px'"
-        [control]="greaterAbvControl"
-        [placeholder]="lesserPlaceHolder"
-      ></app-custom-text-input>
+  <form
+    [formGroup]="alcoholControlGroup"
+    [ngClass]="{ open: isOpen, closed: !isOpen }"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="filter-section">
+      <div class="item">
+        <app-custom-text-input
+          [type]="'number'"
+          [width]="'92px'"
+          [control]="greaterAbvControl"
+          [placeholder]="lesserPlaceHolder"
+        ></app-custom-text-input>
+      </div>
+      <div class="item">
+        <app-custom-text-input
+          [type]="'number'"
+          [width]="'92px'"
+          [control]="lesserAbvControl"
+          [placeholder]="greaterPlaceHolder"
+        ></app-custom-text-input>
+      </div>
+      <div class="item">
+        <app-text-button
+          [width]="'85px '"
+          [text]="'Apply'"
+          [type]="'submit'"
+        ></app-text-button>
+      </div>
     </div>
-    <div class="item">
-      <app-custom-text-input
-        [type]="'number'"
-        [width]="'92px'"
-        [control]="lesserAbvControl"
-        [placeholder]="greaterPlaceHolder"
-      ></app-custom-text-input>
+    <div class="error-container" *ngIf="alcoholControlGroup.invalid">
+      <p *ngIf="alcoholControlGroup.hasError('invalid_intputs')">
+        The From value is greater than the Until value
+      </p>
     </div>
-    <div class="item">
-      <app-text-button
-        [width]="'85px '"
-        [text]="'Apply'"
-        (buttonClicked)="onClick()"
-      ></app-text-button>
-    </div>
-  </div>
+  </form>
 </div>

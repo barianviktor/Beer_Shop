@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="item" *ngFor="let item of visibleItems()">
+      <app-search-item-card
+        [favorited]="itemIsOnWishlist(item.id)"
+        (cartEmit)="onAddToCart($event)"
+        (favoriteEmit)="onAddToWishlist(item.id)"
+        [beer]="item"
+      ></app-search-item-card>
+    </div>
+  </div>
+  <app-custom-paging
+    (setNext)="next()"
+    (setPrevious)="previous()"
+    [dots]="makeDots()"
+    (setValue)="setCurrent($event)"
+    [currentValue]="currentStepValue / stepValue"
+  ></app-custom-paging>
+</div>

@@ -25,6 +25,9 @@ import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-
 import { CheckoutCardComponent } from './components/cards/checkout-card/checkout-card.component';
 import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-to-cart-card.component';
 import { PriceCardComponent } from './components/cards/price-card/price-card.component';
+import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
+import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
+import { CustomPagingComponent } from './components/custom-paging/custom-paging.component';
 
 @NgModule({
   declarations: [
@@ -50,9 +53,13 @@ import { PriceCardComponent } from './components/cards/price-card/price-card.com
     CheckoutCardComponent,
     AddToCartCardComponent,
     PriceCardComponent,
+    CustomIconComponent,
+    ItemCarouselComponent,
+    CustomPagingComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
+    ReactiveFormsModule,
     CommonModule,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
@@ -75,6 +82,8 @@ import { PriceCardComponent } from './components/cards/price-card/price-card.com
     CheckoutCardComponent,
     AddToCartCardComponent,
     PriceCardComponent,
+    CustomIconComponent,
+    ItemCarouselComponent,
   ],
 })
 export class SharedModule {}

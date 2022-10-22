@@ -65,3 +65,19 @@ p{
     mask-image: url("/assets/icons/heart.svg");
 
 }
+
+.icon{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+.favorite_icon{
+    &:hover{
+        filter: invert(13%) sepia(95%) saturate(6561%) hue-rotate(9deg) brightness(110%) contrast(124%);
+    }
+    
+}
+.active_favorite_icon {
+    filter: invert(13%) sepia(95%) saturate(6561%) hue-rotate(9deg) brightness(110%) contrast(124%);
+
+}

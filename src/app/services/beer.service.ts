@@ -1,25 +1,62 @@
-import { ISavedBeer } from './../interfaces/savedBeer.interface';
-import { CartService } from './cart.service';
-import { WhislistService } from './whislist.service';
-import { IBeer } from './../interfaces/beer.interface';
-import { environment } from './../../environments/environment';
-import { IBeerSearchCard } from './../interfaces/beer-search-card.interface';
+import { IBeerSearchParameters } from './../interfaces/beerSearchParameters.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, switchMap, tap } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { environment } from './../../environments/environment';
+import { IBeer } from './../interfaces/beer.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BeerService {
   API = environment.api + '/beers';
-  constructor(
-    private http: HttpClient,
-    private whislistService: WhislistService,
-    private cartService: CartService
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  getMultipleBeerFromIds$(ids: number[]): Observable<IBeer[]> {
+  getBeersbySearchParameters$(
+    searchParams: IBeerSearchParameters
+  ): Observable<IBeer[]> {
+    let query: any = {};
+    if (searchParams.beer_name) {
+      query.beer_name = searchParams.beer_name;
+    }
+    if (searchParams.per_page) {
+      query.per_page = searchParams.per_page;
+    }
+    if (searchParams.page) {
+      query.page = searchParams.page;
+    }
+    if (searchParams.hops) {
+      query.hops = searchParams.hops;
+    }
+    if (searchParams.malts) {
+      query.malts = searchParams.malts;
+    }
+    if (searchParams.abv_lt) {
+      query.abv_lt = searchParams.abv_lt;
+    }
+    if (searchParams.abv_gt) {
+      query.abv_gt = searchParams.abv_gt;
+    }
+
+    return this.http
+      .get<IBeer[]>(this.API, {
+        params: query,
+      })
+      .pipe(
+        map((beers: IBeer[]) => {
+          if (beers) {
+            beers.forEach((beer: IBeer) => {
+              beer = this.giveBeerBonusCredentials(beer);
+            });
+            return beers;
+          } else {
+            return [];
+          }
+        })
+      );
+  }
+
+  getBeersByIds$(ids: number[]): Observable<IBeer[]> {
     if (ids.length > 0) {
       console.log(this.API + '/' + ids.join('|'));
 
@@ -45,51 +82,54 @@ export class BeerService {
   getBeers$(): Observable<IBeer[]> {
     return this.http.get<IBeer[]>(this.API).pipe(
       map((beers: IBeer[]) => {
-        beers.forEach((beer: IBeer) => {
-          beer = this.giveBeerBonusCredentials(beer);
-        });
-        return beers;
+        if (beers) {
+          beers.forEach((beer: IBeer) => {
+            beer = this.giveBeerBonusCredentials(beer);
+          });
+          return beers;
+        } else {
+          return [];
+        }
       })
     );
   }
 
-  getBeerSearchCard$(id: number): Observable<IBeerSearchCard> {
-    return this.getBeer$(id).pipe(
-      map((beer: IBeer) => {
-        let beerSearchCard: IBeerSearchCard = {
-          ...beer,
-        };
-        return beerSearchCard;
+  youMightAlsoLikeBeers$(contributor: string): Observable<IBeer[]> {
+    return this.http
+      .get<IBeer[]>(this.API, {
+        params: {
+          contributed_by: contributor,
+          per_page: '15',
+        },
       })
-    );
+      .pipe(
+        map((beers: IBeer[]) => {
+          if (beers) {
+            beers.forEach((beer: IBeer) => {
+              beer = this.giveBeerBonusCredentials(beer);
+            });
+            return beers;
+          } else {
+            return [];
+          }
+        })
+      );
   }
-  getBeerSearchCards$(): Observable<IBeerSearchCard[]> {
-    return this.getBeers$().pipe(
-      map((beers: IBeer[]) => {
-        let searchCards: IBeerSearchCard[] = [];
-        beers.forEach((beer: IBeer) => {
-          searchCards.push({
-            ...beer,
-          });
-        });
-        return searchCards;
-      })
-    );
-  }
+
   giveBeerBonusCredentials(beer: IBeer): IBeer {
     beer.badges = [];
     beer.onSale = 0;
     beer.content = 0;
     beer.price = 0;
-    if (beer.id % 8 == 0) {
+    if (beer.name.length % 8 == 0) {
       //out of stock
       beer.badges.push({
         id: 1,
-        name: 'Sold Out',
+        name: 'Sold out',
       });
     } else {
       //in stock
-      beer.price = beer.id;
+      beer.price = beer.name.length * 0.4;
       if (beer.id % 2 == 0) {
         beer.content = 0.5;
       } else {
@@ -98,14 +138,9 @@ export class BeerService {
       if (beer.name.includes('t')) {
         beer.onSale = 10;
       }
-      if (beer.name.includes('e')) {
-        beer.onSale = 12;
-      }
-      if (beer.name.includes('g')) {
+
+      if (beer.name.includes('c')) {
         beer.onSale = 25;
-      }
-      if (beer.name.includes('r')) {
-        beer.onSale = 33;
       }
 
       if (beer.tagline.includes('k')) {
@@ -113,12 +148,13 @@ export class BeerService {
           id: 2,
           name: 'New',
         });
-      }
-      if (beer.tagline.includes('h')) {
-        beer.badges.push({
-          id: 3,
-          name: 'Product of the week',
-        });
+      } else {
+        if (beer.tagline.includes('h')) {
+          beer.badges.push({
+            id: 3,
+            name: 'Product of the week',
+          });
+        }
       }
     }
 
@@ -204,14 +240,12 @@ export class BeerService {
     console.log(beer);
 
     return beer;
-  } */
-
-  getRandomFloat(min: number, max: number, decimals: number) {
+  }  getRandomFloat(min: number, max: number, decimals: number) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
     return parseFloat(str);
   }
   getRandomNumber(min: number, max: number) {
     let random = Math.floor(Math.random() * (max - min + 1) + min);
     return random;
-  }
+  } */
 }

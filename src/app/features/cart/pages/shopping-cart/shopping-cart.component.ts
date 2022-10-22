@@ -1,5 +1,7 @@
+import { WhislistService } from './../../../../services/whislist.service';
+import { RecentItemsService } from './../../../../services/recent-items.service';
 import { BeerService } from './../../../../services/beer.service';
-import { Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { CartService } from './../../../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { IBeer } from 'src/app/interfaces/beer.interface';
@@ -13,16 +15,26 @@ import { ICartItem } from 'src/app/interfaces/cartItem';
 })
 export class ShoppingCartComponent implements OnInit {
   cartItems$: Observable<ICartItem[]>;
-  constructor(private cartService: CartService) {
-    this.cartItems$ = this.cartService.shoppingCart$; /* .pipe(
-      switchMap((savedBeers: ISavedBeer[]) => {
-        let ids: number[] = [];
-        savedBeers.forEach((beer: ISavedBeer) => {
-          ids.push(beer.id);
-        });
-        return this.beerService.getMultipleBeerFromIds$(ids);
+  recentItems$: Observable<IBeer[]>;
+  youMightAlsoLikeBeers$?: Observable<IBeer[]>;
+  constructor(
+    private cartService: CartService,
+    private recentItemsService: RecentItemsService,
+    private whislistService: WhislistService,
+    private beerService: BeerService
+  ) {
+    this.cartItems$ = this.cartService.shoppingCart$.pipe(
+      tap((cartItems: ICartItem[]) => {
+        this.youMightAlsoLikeBeers$ = this.beerService.youMightAlsoLikeBeers$(
+          cartItems[0].item.contributed_by
+        );
       })
-    ); */
+    );
+    this.recentItems$ = this.recentItemsService.recentItems$.pipe(
+      switchMap((ids: number[]) => {
+        return this.beerService.getBeersByIds$(ids);
+      })
+    );
   }
 
   ngOnInit(): void {}
@@ -52,5 +64,11 @@ export class ShoppingCartComponent implements OnInit {
   }
   getFreeShippingFrom(): number {
     return this.cartService.billingOptions.freeShippingFrom;
+  }
+  onWhislistEmitter(id: number): void {
+    this.whislistService.addOrRemoveFromList(id);
+  }
+  isInWhislist(id: number): boolean {
+    return this.whislistService.isInTheList(id);
   }
 }
