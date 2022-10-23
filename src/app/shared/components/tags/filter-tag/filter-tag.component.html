@@ -5,7 +5,7 @@
   [ngStyle]="{ width: width, borderRadius: borderRadius }"
 >
   <div>
-    <p>{{ text }}</p>
+    <p>{{ text | filter }}</p>
     <img [src]="icon_path" alt="filter-tag-icon" />
   </div>
 </div>

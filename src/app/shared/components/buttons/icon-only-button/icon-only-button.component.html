@@ -2,6 +2,7 @@
   [ngStyle]="{ width: width, borderRadius: borderRadius }"
   (click)="handleClick()"
   [disabled]="disabled"
+  [class]="iconClass"
 >
-  <img [src]="icon_path" alt="button-icon" />
+  <img [class]="'icon '" [src]="icon_path" alt="button-icon" />
 </button>

@@ -6,6 +6,7 @@
     [disabled]="disabled"
     [type]="type"
     [placeholder]="placeholder"
+    (input)="onInput($event)"
   />
   <div *ngIf="control.touched && control.invalid" class="error-container">
     <div *ngIf="control.hasError('email')" class="error-item">

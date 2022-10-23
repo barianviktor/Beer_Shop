@@ -6,6 +6,7 @@ a{
     img{
         width: 24px;
         height: 24px;
+        filter: invert(45%) sepia(96%) saturate(373%) hue-rotate(139deg) brightness(88%) contrast(99%);
     }
     p{
         @include text-caption-small;
@@ -14,24 +15,23 @@ a{
     }
     @include inline-flex-everything-centered;
     flex-direction: column;
-    background-color: $greyscale-white;
     color: $greyscale-black;
+    background-color: $greyscale-white;
     cursor: pointer;
     min-width: 64px;
-    height: 44px;
     border: 2px solid $greyscale-white;
     outline: none;
 }
 
-div:hover{
+a:hover {
     color: $primary-turquoise-dark;
 
 }
-div:focus{
+a:focus{
     color: $primary-turquoise-dark;
     border: 2px solid $accent-orange;
 }
-div:active{
+a:active{
     color: $primary-turquoise-dark;
     border: 2px solid $greyscale-white;
 }

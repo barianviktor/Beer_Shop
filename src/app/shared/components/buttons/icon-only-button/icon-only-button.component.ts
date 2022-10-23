@@ -10,6 +10,7 @@ export class IconOnlyButtonComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() width: string = '40px';
   @Input() borderRadius: string = '4px';
+  @Input() iconClass: string = 'default_icon';
   @Output() buttonClicked = new EventEmitter<void>();
 
   constructor() {}

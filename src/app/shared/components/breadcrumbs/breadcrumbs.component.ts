@@ -8,11 +8,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class BreadcrumbsComponent implements OnInit {
   @Input() text: string = 'Home';
   @Input() icon_path: string = 'assets/icons/nav-arrow-right-side.svg';
-  @Output() linkClicked = new EventEmitter<void>();
+  @Input() linkTo: string[] = [''];
   constructor() {}
 
   ngOnInit(): void {}
-  onLinkClicked() {
-    this.linkClicked.emit();
-  }
 }

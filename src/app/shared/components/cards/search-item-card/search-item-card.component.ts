@@ -11,10 +11,9 @@ import { ICartItem } from 'src/app/interfaces/cartItem';
 export class SearchItemCardComponent implements OnInit {
   @Input() beer!: IBeer;
   @Input() favorited: boolean = false;
-  quantityControl = new FormControl<number>(1, { nonNullable: true });
-
   @Output() favoriteEmit = new EventEmitter<number>();
   @Output() cartEmit = new EventEmitter<ICartItem>();
+  quantityControl = new FormControl<number>(1, { nonNullable: true });
   constructor() {}
 
   ngOnInit(): void {}
@@ -27,5 +26,10 @@ export class SearchItemCardComponent implements OnInit {
       item: this.beer,
       quantity: this.quantityControl.value,
     });
+  }
+  onQuantityChange(value: string): void {
+    if (parseInt(value) < 1 || value === '') {
+      this.quantityControl.setValue(1);
+    }
   }
 }

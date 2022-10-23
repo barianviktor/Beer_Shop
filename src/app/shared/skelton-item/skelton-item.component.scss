@@ -1,0 +1,19 @@
+@use '../../../assets/styles/' as * ;
+:host{
+    width: 100%;
+    height: 100%;
+}
+.skelton-item{
+    opacity: 0.4;
+    border-radius: 4px;
+
+   // animation: skelton-loading 1s linear infinite alternate;
+}
+@keyframes skelton-loading {
+    0% {
+        background-color: #eee;
+    }
+    100% {
+        background-color: rgb(235, 235, 235);
+    }
+}

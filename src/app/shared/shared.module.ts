@@ -28,6 +28,9 @@ import { PriceCardComponent } from './components/cards/price-card/price-card.com
 import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
 import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
 import { CustomPagingComponent } from './components/custom-paging/custom-paging.component';
+import { FilterPipe } from '../utils/pipes/filter.pipe';
+import { SearchItemCardSkeltonComponent } from './components/cards/search-item-card-skelton/search-item-card-skelton.component';
+import { SkeltonItemComponent } from './skelton-item/skelton-item.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { CustomPagingComponent } from './components/custom-paging/custom-paging.
     CustomIconComponent,
     ItemCarouselComponent,
     CustomPagingComponent,
+    FilterPipe,
+    SearchItemCardSkeltonComponent,
+    SkeltonItemComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -84,6 +90,8 @@ import { CustomPagingComponent } from './components/custom-paging/custom-paging.
     PriceCardComponent,
     CustomIconComponent,
     ItemCarouselComponent,
+    FilterPipe,
+    SearchItemCardSkeltonComponent,
   ],
 })
 export class SharedModule {}

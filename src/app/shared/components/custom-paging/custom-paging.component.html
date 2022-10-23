@@ -1,17 +1,19 @@
 <div class="paginator-container">
-  <button [disabled]="currentValue == dots[0]" (click)="onSetPrevious()">
-    <img src="assets/icons/arrow-left.svg" alt="" />
-  </button>
+  <app-icon-only-button
+    [icon_path]="'assets/icons/arrow-left.svg'"
+    [disabled]="currentValue == dots[0]"
+    (buttonClicked)="onSetPrevious()"
+  ></app-icon-only-button>
   <div
     class="item"
     (click)="onSetValue(value)"
     [ngClass]="{ active: value === currentValue }"
     *ngFor="let value of dots"
   ></div>
-  <button
+
+  <app-icon-only-button
+    [icon_path]="'assets/icons/arrow-right.svg'"
     [disabled]="currentValue == dots[dots.length - 1]"
-    (click)="onSetNext()"
-  >
-    <img src="assets/icons/arrow-right.svg" alt="" />
-  </button>
+    (buttonClicked)="onSetNext()"
+  ></app-icon-only-button>
 </div>
