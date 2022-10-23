@@ -1,48 +1,66 @@
-<div class="cart">
+<ng-container *ngIf="cartItems$ | async as cartItems">
   <h1>Shopping Cart</h1>
-  <div class="cart-items-container">
-    <div class="table-header">
-      <div class="product-header">Product</div>
-      <div class="contributor-header">Contributor</div>
-      <div class="price-header">Price</div>
-      <div class="quantity-header">Quantity</div>
-      <div class="subtotal-header">Subtotal</div>
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="cart">
+    <div class="cart-items-container">
+      <div class="table-header">
+        <div class="product-header">Product</div>
+        <div class="contributor-header">Contributor</div>
+        <div class="price-header">Price</div>
+        <div class="quantity-header">Quantity</div>
+        <div class="subtotal-header">Subtotal</div>
+      </div>
+      <ng-container *ngFor="let cartItem of cartItems">
+        <app-cart-item
+          *ngIf="cartItem"
+          [cartItem]="cartItem"
+          (increaseQuantity)="onIncrementQuantity($event)"
+          (decreaseQuantity)="onDecrementQuantity($event)"
+          (removeItem)="onRemoveItem(cartItem.item.id)"
+          (whislistEmitter)="onWhislistEmitter(cartItem.item.id)"
+          [favorited]="isInWhislist(cartItem.item.id)"
+        ></app-cart-item>
+      </ng-container>
     </div>
-    <app-cart-item
-      *ngFor="let cartItem of cartItems$ | async"
-      [cartItem]="cartItem"
-      (increaseQuantity)="onIncrementQuantity($event)"
-      (decreaseQuantity)="onDecrementQuantity($event)"
-      (removeItem)="onRemoveItem(cartItem.item.id)"
-      (whislistEmitter)="onWhislistEmitter(cartItem.item.id)"
-      [favorited]="isInWhislist(cartItem.item.id)"
-    ></app-cart-item>
+    <div class="checkout-card-container">
+      <app-checkout-card
+        [freeShippingFrom]="getFreeShippingFrom()"
+        [shipping]="getShippingCost()"
+        [vat]="getVatCost()"
+        [itemsValue]="getItemsCost()"
+        [total]="getTotalCost()"
+      ></app-checkout-card>
+    </div>
   </div>
-  <div class="you-may-also-like-container">
-    <h3>You might also like...</h3>
-    <app-item-carousel
+  <div class="hooks">
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+      <p>Start adding items to your cart.</p>
+      <a [routerLink]="['/']" class="link">Store</a>
+    </ng-template>
+    <div
       *ngIf="youMightAlsoLikeBeers$ | async as items"
-      [items]="items"
-      [title]="'Customers also bought'"
-    ></app-item-carousel>
-  </div>
-  <ng-container *ngIf="recentItems$ | async as items">
-    <div *ngIf="items.length > 0">
-      <h3>Recently viewed items</h3>
-      <div class="recently-viewed-items">
-        <div *ngFor="let item of items" class="item">
-          <app-search-item-card [beer]="item"></app-search-item-card>
+      class="you-may-also-like-container"
+    >
+      <h3>You might also like...</h3>
+      <app-item-carousel
+        [items]="items"
+        [title]="'Customers also bought'"
+      ></app-item-carousel>
+    </div>
+    <ng-container *ngIf="recentItems$ | async as items">
+      <div *ngIf="items.length > 0">
+        <h3>Recently viewed items</h3>
+        <div class="recently-viewed-items">
+          <div *ngFor="let item of items" class="item">
+            <app-search-item-card
+              (favoriteEmit)="onWhislistEmitter(item.id)"
+              (cartEmit)="onAddToCart($event)"
+              [favorited]="isInWhislist(item.id)"
+              [beer]="item"
+            ></app-search-item-card>
+          </div>
         </div>
       </div>
-    </div>
-  </ng-container>
-</div>
-<div class="checkout-card-container">
-  <app-checkout-card
-    [freeShippingFrom]="getFreeShippingFrom()"
-    [shipping]="getShippingCost()"
-    [vat]="getVatCost()"
-    [itemsValue]="getItemsCost()"
-    [total]="getTotalCost()"
-  ></app-checkout-card>
-</div>
+    </ng-container>
+  </div>
+</ng-container>

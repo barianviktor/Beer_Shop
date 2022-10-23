@@ -1,5 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 function lesserIsNotGreaterValidator(group: AbstractControl): {
   [s: string]: boolean;
@@ -32,8 +37,12 @@ function lesserIsNotGreaterValidator(group: AbstractControl): {
 export class SearchFilterAlcoholRangeComponent implements OnInit {
   alcoholControlGroup: FormGroup = new FormGroup(
     {
-      greaterAbvControl: new FormControl<number | undefined>(undefined),
-      lesserAbvControl: new FormControl<number | undefined>(undefined),
+      greaterAbvControl: new FormControl<number | undefined>(undefined, {
+        validators: [Validators.min(0)],
+      }),
+      lesserAbvControl: new FormControl<number | undefined>(undefined, {
+        validators: [Validators.min(0)],
+      }),
     },
     {
       validators: [lesserIsNotGreaterValidator],
@@ -71,6 +80,16 @@ export class SearchFilterAlcoholRangeComponent implements OnInit {
   }
   handleOpenClose(): void {
     this.isOpen = !this.isOpen;
+  }
+  handleGreaterInput(input: string): void {
+    if (parseInt(input) < 0) {
+      this.greaterAbvControl.setValue(undefined);
+    }
+  }
+  handleLesserInput(input: string): void {
+    if (parseInt(input) < 0) {
+      this.lesserAbvControl.setValue(undefined);
+    }
   }
   onSubmit() {
     if (this.alcoholControlGroup.valid) {

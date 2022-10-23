@@ -4,19 +4,26 @@
     grid-template-columns: repeat(12, 1fr);
 }
 .cart{
-    grid-column: 1/10;
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
 
 }
 .checkout-card-container{
     grid-column: 10/13;
-    padding-top: 100px;
     width: 100%;
 }
 h1{
     margin: 16px 0;
+    grid-column: 1/13;
+}
+.hooks{
+    grid-column: 1/13;
+width: 100%;
 }
 .cart-items-container{
     width: 97%;
+    grid-column: 1/10;
 }
 
 .table-header{

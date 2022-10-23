@@ -71,13 +71,40 @@ p{
     height: 24px;
     cursor: pointer;
 }
-.favorite_icon{
+.default_icon img{
+    filter: invert(0%) sepia(84%) saturate(7500%) hue-rotate(328deg) brightness(114%) contrast(114%);
+    &:hover{
+        filter: invert(45%) sepia(96%) saturate(373%) hue-rotate(139deg) brightness(88%) contrast(99%);
+    }
+}
+.default_icon:disabled img{
+    filter: invert(49%) sepia(2%) saturate(614%) hue-rotate(175deg) brightness(100%) contrast(87%);
+
+}
+.favorite_icon img{
+    filter: invert(0%) sepia(84%) saturate(7500%) hue-rotate(328deg) brightness(114%) contrast(114%);
     &:hover{
         filter: invert(13%) sepia(95%) saturate(6561%) hue-rotate(9deg) brightness(110%) contrast(124%);
     }
     
 }
-.active_favorite_icon {
+.active_favorite_icon img {
     filter: invert(13%) sepia(95%) saturate(6561%) hue-rotate(9deg) brightness(110%) contrast(124%);
+}
+.skelton-item{
+    width: 100%;
+    opacity: 0.4;
+    background-color: red;
 
+    animation: skelton-loading 1s linear infinite alternate;
+}
+
+
+@keyframes skelton-loading {
+    0% {
+        background-color: #eee;
+    }
+    100% {
+        background-color: #ddd;
+    }
 }

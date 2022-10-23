@@ -1,1 +1,50 @@
-<p>whislist works!</p>
+<div *ngIf="beers$ | async as beers; else elseBlock">
+  <ng-container *ngIf="beers.length > 0; else elseBlock">
+    <div class="beers-container">
+      <div *ngFor="let beer of beers" class="item">
+        <app-search-item-card
+          (cartEmit)="addToCart($event)"
+          (favoriteEmit)="whisListHandler(beer.id)"
+          [favorited]="isInTheWhislist(beer.id)"
+          [beer]="beer"
+        ></app-search-item-card>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseBlock>
+    <div>
+      <p>There are no beers on your whislist</p>
+      <a [routerLink]="['/']">Go to the beers list</a>
+    </div>
+  </ng-template>
+</div>
+<ng-template #elseBlock>
+  <div class="beers-container">
+    <div *ngFor="let item of [1, 2, 3, 4, 5, 6]" class="item">
+      <app-search-item-card-skelton></app-search-item-card-skelton>
+    </div>
+  </div>
+</ng-template>
+<!-- <div *ngIf="beers$ | async as beers">
+  <ng-container *ngIf="beers.length > 0; else elseBlock">
+  
+    <div class="beers-container">
+      <div *ngFor="let beer of beers" class="item">
+        <app-search-item-card
+          (cartEmit)="addToCart($event)"
+          (favoriteEmit)="whisListHandler(beer.id)"
+          [favorited]="isInTheWhislist(beer.id)"
+          [beer]="beer"
+        ></app-search-item-card>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseBlock>
+   
+    <div>
+      <p>There are no beers on your whislist</p>
+      <a [routerLink]="['/']">Go to the beers list</a>
+    </div>
+  </ng-template>
+</div>
+ -->

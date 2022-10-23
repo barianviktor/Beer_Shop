@@ -1,0 +1,10 @@
+.beers-container{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin:50px auto;
+    width: 90%;
+}
+.item{
+    width: 95%;
+    margin: 2.5%
+}

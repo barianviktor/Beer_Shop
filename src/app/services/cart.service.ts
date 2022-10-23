@@ -10,28 +10,7 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class CartService {
-  shoppingCart$ = new BehaviorSubject<ICartItem[]>([
-    {
-      quantity: 1,
-      item: {
-        abv: '',
-        badges: [],
-        brewers_tips: '',
-        content: 1,
-        contributed_by: 'dsadsa',
-        description: '',
-        first_brewed: '',
-        food_pairing: [],
-        id: 1,
-        ingredients: '',
-        image_url: 'https://images.punkapi.com/v2/2.png',
-        name: 'Trashy Blonde',
-        onSale: 2,
-        price: 2,
-        tagline: '',
-      },
-    },
-  ]);
+  shoppingCart$ = new BehaviorSubject<ICartItem[]>([]);
   billingOptions = {
     vatPercent: 0.27,
     shippingCost: 10,

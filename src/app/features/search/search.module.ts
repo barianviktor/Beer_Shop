@@ -4,6 +4,7 @@ import { SearchRoutingModule } from './search-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { SearchFilterContainerComponent } from './components/search-filter-container/search-filter-container.component';
 import { SearchFilterAlcoholRangeComponent } from './components/search-filter-alcohol-range/search-filter-alcohol-range.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,6 @@ import { SearchFilterAlcoholRangeComponent } from './components/search-filter-al
     SearchFilterContainerComponent,
     SearchFilterAlcoholRangeComponent,
   ],
-  imports: [SharedModule, SearchRoutingModule],
+  imports: [SharedModule, SearchRoutingModule, InfiniteScrollModule],
 })
 export class SearchModule {}

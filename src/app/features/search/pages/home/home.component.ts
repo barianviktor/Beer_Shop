@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   hops: string[] = [];
   malts: string[] = [];
   beerSearchParameters: IBeerSearchParameters;
+  scrollIsActive$: BehaviorSubject<boolean>;
+  currentlyFetching$: BehaviorSubject<boolean>;
   constructor(
     private searchService: SearchService,
     private whislistService: WhislistService,
@@ -26,6 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.hops = this.searchService.hops;
     this.malts = this.searchService.malts;
     this.beerSearchParameters = this.searchService.searchParameters;
+    this.scrollIsActive$ = this.searchService.scrollIsActive$;
+    this.currentlyFetching$ = this.searchService.currentlyFetching$;
   }
   ngOnDestroy(): void {
     this.searchService.onResetToDefault();
@@ -34,7 +38,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchService.getBeersBySearchParameters();
   }
+  onScroll() {
+    console.log('scrolled');
 
+    this.searchService.onHandleNextPage();
+  }
   onHandleWhislist(id: number) {
     this.whislistService.addOrRemoveFromList(id);
   }

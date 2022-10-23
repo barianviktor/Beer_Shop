@@ -1,3 +1,4 @@
+import { NotificationService } from 'src/app/services/notification.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,12 +6,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class WhislistService {
-  whistlist$ = new BehaviorSubject<number[]>([]);
-  constructor() {}
+  whistlist$ = new BehaviorSubject<number[]>([2, 56, 1, 3, 78]);
+  constructor(private notificationService: NotificationService) {}
   addToList(id: number): void {
     let list = this.whistlist$.getValue();
     list.push(id);
     this.whistlist$.next(list);
+    this.notificationService.successNotification('Item added to whislist', {
+      linkTo: '/whislist',
+      message: 'Go to whislist',
+    });
   }
   removeFromList(id: number): void {
     let list = this.whistlist$.getValue();
@@ -21,6 +26,10 @@ export class WhislistService {
       1
     );
     this.whistlist$.next(list);
+    this.notificationService.failureNotification('Item removed from whislist', {
+      linkTo: '/whislist',
+      message: 'Go to whislist',
+    });
   }
   isInTheList(id: number): boolean {
     let list = this.whistlist$.getValue();

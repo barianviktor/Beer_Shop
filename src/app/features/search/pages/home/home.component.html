@@ -49,7 +49,14 @@
       </div>
     </div>
 
-    <div class="search-items-container">
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="1500"
+      (scrolled)="onScroll()"
+      [infiniteScrollDisabled]="!scrollIsActive$.getValue()"
+      class="search-items-container"
+    >
       <div *ngFor="let beer of beers$ | async" class="search-item">
         <app-search-item-card
           (cartEmit)="onHandleCart($event)"
@@ -57,6 +64,14 @@
           [beer]="beer"
           [favorited]="isInWhislist(beer.id)"
         ></app-search-item-card>
+      </div>
+      <div class="loading-items" *ngIf="currentlyFetching$.getValue()">
+        <div class="search-item" *ngFor="let item of [1, 2, 3, 4, 5, 6]">
+          <app-search-item-card-skelton></app-search-item-card-skelton>
+        </div>
+      </div>
+      <div class="end-message" *ngIf="!scrollIsActive$.getValue()">
+        <h4>Looks Like we are out of this kind of beers</h4>
       </div>
     </div>
   </section>

@@ -43,6 +43,13 @@
         display: block;
     }
 }
+.loading-items{
+    width: 100%;
+    grid-column: 1/4;
+    grid-auto-rows: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
 .search-items-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -62,4 +69,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.end-message{
+    grid-column:  1/4;
+    text-align: center;
+    width: 100%;
 }

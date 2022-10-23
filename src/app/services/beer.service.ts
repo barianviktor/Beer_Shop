@@ -29,7 +29,7 @@ export class BeerService {
       query.hops = searchParams.hops;
     }
     if (searchParams.malts) {
-      query.malts = searchParams.malts;
+      query.malt = searchParams.malts;
     }
     if (searchParams.abv_lt) {
       query.abv_lt = searchParams.abv_lt;
@@ -58,7 +58,7 @@ export class BeerService {
 
   getBeersByIds$(ids: number[]): Observable<IBeer[]> {
     if (ids.length > 0) {
-      console.log(this.API + '/' + ids.join('|'));
+      console.log(this.API + '?ids=' + ids.join('|'));
 
       return this.http.get<IBeer[]>(this.API + '?ids=' + ids.join('|')).pipe(
         map((beers: IBeer[]) => {

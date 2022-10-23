@@ -1,12 +1,11 @@
-import { WhislistService } from './../../../../services/whislist.service';
-import { RecentItemsService } from './../../../../services/recent-items.service';
-import { BeerService } from './../../../../services/beer.service';
-import { map, Observable, switchMap, tap } from 'rxjs';
-import { CartService } from './../../../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, switchMap, tap } from 'rxjs';
 import { IBeer } from 'src/app/interfaces/beer.interface';
-import { ISavedBeer } from 'src/app/interfaces/savedBeer.interface';
 import { ICartItem } from 'src/app/interfaces/cartItem';
+import { BeerService } from './../../../../services/beer.service';
+import { CartService } from './../../../../services/cart.service';
+import { RecentItemsService } from './../../../../services/recent-items.service';
+import { WhislistService } from './../../../../services/whislist.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,7 +14,7 @@ import { ICartItem } from 'src/app/interfaces/cartItem';
 })
 export class ShoppingCartComponent implements OnInit {
   cartItems$: Observable<ICartItem[]>;
-  recentItems$: Observable<IBeer[]>;
+  recentItems$?: Observable<IBeer[]>;
   youMightAlsoLikeBeers$?: Observable<IBeer[]>;
   constructor(
     private cartService: CartService,
@@ -25,9 +24,11 @@ export class ShoppingCartComponent implements OnInit {
   ) {
     this.cartItems$ = this.cartService.shoppingCart$.pipe(
       tap((cartItems: ICartItem[]) => {
-        this.youMightAlsoLikeBeers$ = this.beerService.youMightAlsoLikeBeers$(
-          cartItems[0].item.contributed_by
-        );
+        if (cartItems.length > 0) {
+          this.youMightAlsoLikeBeers$ = this.beerService.youMightAlsoLikeBeers$(
+            cartItems[0].item.contributed_by
+          );
+        }
       })
     );
     this.recentItems$ = this.recentItemsService.recentItems$.pipe(
@@ -40,8 +41,6 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {}
 
   onDecrementQuantity(id: number) {
-    console.log('decre');
-
     this.cartService.decreaseQuantity(id);
   }
   onIncrementQuantity(id: number) {
@@ -70,5 +69,9 @@ export class ShoppingCartComponent implements OnInit {
   }
   isInWhislist(id: number): boolean {
     return this.whislistService.isInTheList(id);
+  }
+  onAddToCart(item: ICartItem): void {
+    this.cartService.addToCart(item);
+    /* this.cartService.addToCart(id); */
   }
 }
