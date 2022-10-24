@@ -3,7 +3,7 @@ export interface IBeerSearchParameters {
   abv_gt?: number;
   abv_lt?: number;
   hops?: string;
-  malts?: string;
+  malt?: string;
   page: number;
   per_page: number;
 }

@@ -31,7 +31,7 @@
       [datas]="malts"
       [title]="'Malts'"
       [width]="'100%'"
-      [selectedValue]="beerSearchParameters.malts"
+      [selectedValue]="beerSearchParameters.malt"
       (checkboxClicked)="onHandleMalts($event)"
     ></app-search-filter-container>
     <app-search-filter-alcohol-range
@@ -59,7 +59,7 @@
           (iconClicked)="onHandleHops(hops)"
         ></app-filter-tag>
         <app-filter-tag
-          *ngIf="beerSearchParameters.malts as malts"
+          *ngIf="beerSearchParameters.malt as malts"
           class="item"
           [text]="malts"
           (iconClicked)="onHandleMalts(malts)"

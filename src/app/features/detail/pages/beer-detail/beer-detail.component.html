@@ -1,4 +1,5 @@
 <div *ngIf="beer$ | async as beer; else elseBlock">
+  <app-notification-bar></app-notification-bar>
   <div class="breadcrumbs-container">
     <app-breadcrumbs [linkTo]="['/']"></app-breadcrumbs>
     <app-breadcrumbs

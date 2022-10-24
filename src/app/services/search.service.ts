@@ -74,10 +74,10 @@ export class SearchService {
   }
   onHandleMalts(item: string): void {
     this.newFilterAdded();
-    if (this.searchParameters.malts == item) {
-      this.searchParameters.malts = undefined;
+    if (this.searchParameters.malt == item) {
+      this.searchParameters.malt = undefined;
     } else {
-      this.searchParameters.malts = item;
+      this.searchParameters.malt = item;
     }
 
     this.getBeersBySearchParameters();
@@ -102,7 +102,7 @@ export class SearchService {
   }
   onResetToDefault(): void {
     this.searchParameters.hops = undefined;
-    this.searchParameters.malts = undefined;
+    this.searchParameters.malt = undefined;
     this.searchParameters.beer_name = undefined;
     this.searchParameters.abv_gt = undefined;
     this.searchParameters.abv_lt = undefined;

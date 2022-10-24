@@ -25,8 +25,6 @@ export class SearchItemCardComponent implements OnInit {
     this.favoriteEmit.emit(this.beer.id);
   }
   onCartClick(): void {
-    console.log(this.quantityControl.value);
-
     if (this.quantityControl.valid && this.quantityControl.value > 0) {
       this.cartEmit.emit({
         item: this.beer,

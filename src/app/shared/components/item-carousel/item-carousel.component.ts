@@ -50,7 +50,6 @@ export class ItemCarouselComponent implements OnInit {
 
   onAddToWishlist(id: number): void {
     this.whislistService.addOrRemoveFromList(id);
-    console.log(this.whislistService.whistlist$.value);
   }
   onAddToCart(item: ICartItem): void {
     this.cartService.addToCart(item);
