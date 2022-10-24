@@ -1,0 +1,70 @@
+@use './variables' as *;
+@mixin inline-flex-everything-centered {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin flex-everything-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin  text-standard {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+@mixin  text-semi-bold {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+}
+@mixin text-bold{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+}
+@mixin  text-uppercase {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+@mixin  text-standard-link {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color:$primary-turquoise-dark;
+}
+@mixin  text-caption {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+}
+@mixin  text-caption-link {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    color:$primary-turquoise-dark;
+}
+@mixin  text-caption-bold {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+@mixin  text-caption-small {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+}
+@mixin  text-caption-small-bold {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 700;
+}
+@mixin  button-label {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+}
