@@ -8,7 +8,7 @@ export class RecentItemsService {
   recentItems$ = new BehaviorSubject<number[]>([]);
   constructor() {}
 
-  addNewRecentItem(id: number) {
+  addNewRecentItem(id: number): void {
     const items = this.recentItems$.value;
     if (!items.includes(id)) {
       items.unshift(id);

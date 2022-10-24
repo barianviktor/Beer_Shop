@@ -14,7 +14,7 @@ export class NotificationService {
       message: string;
       linkTo: string[];
     }
-  ) {
+  ): void {
     let notification: INotification = {
       message: message,
       status: 'SUCCESS',
@@ -28,7 +28,7 @@ export class NotificationService {
       message: string;
       linkTo: string[];
     }
-  ) {
+  ): void {
     let notification: INotification = {
       message: message,
       status: 'FAILURE',
@@ -36,7 +36,7 @@ export class NotificationService {
     };
     this.notifications$.next(notification);
   }
-  closeNotification() {
+  closeNotification(): void {
     this.notifications$.next();
   }
 }

@@ -11,7 +11,7 @@ import { IBeer } from './../interfaces/beer.interface';
 export class BeerService {
   API = environment.api + '/beers';
   constructor(private http: HttpClient) {}
-  getCustomersAlsoBought$(abv: number) {
+  getCustomersAlsoBought$(abv: number): Observable<IBeer[]> {
     /* the api was not suited for searching by contributors
     so is searched for the same abv 
     */

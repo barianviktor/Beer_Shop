@@ -30,10 +30,20 @@ label::before{
     margin-right:  8px;
 
 }
-
-input:checked +  label::before{
-    content: url("/assets/icons/check.svg");
+label img{
+    width: 12px;
+    height: 12px;
+    display: none;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 1;
 }
+input:checked + label img{
+    display: block;
+}
+
+
 .checkbox-container:hover label::before{
     border: 1px solid $primary-turquoise;
 

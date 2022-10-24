@@ -38,19 +38,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchService.getBeersBySearchParameters();
   }
-  onScroll() {
+  onScroll(): void {
     if (!this.currentlyFetching$.getValue()) {
-      console.log('scrolled');
       this.searchService.onHandleNextPage();
     }
   }
-  onHandleWhislist(id: number) {
+  onHandleWhislist(id: number): void {
     this.whislistService.addOrRemoveFromList(id);
   }
-  isInWhislist(id: number) {
+  isInWhislist(id: number): boolean {
     return this.whislistService.isInTheList(id);
   }
-  onHandleCart(cartItem: ICartItem) {
+  onHandleCart(cartItem: ICartItem): void {
     this.cartService.addToCart(cartItem);
   }
   onHandleHops(item: string): void {
