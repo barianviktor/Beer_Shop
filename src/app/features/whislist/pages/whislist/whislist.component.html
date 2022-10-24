@@ -1,4 +1,5 @@
 <div *ngIf="beers$ | async as beers; else elseBlock">
+  <app-notification-bar></app-notification-bar>
   <ng-container *ngIf="beers.length > 0; else elseBlock">
     <div class="beers-container">
       <div *ngFor="let beer of beers" class="item">

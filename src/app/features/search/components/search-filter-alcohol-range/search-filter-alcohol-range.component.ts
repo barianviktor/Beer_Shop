@@ -69,8 +69,6 @@ export class SearchFilterAlcoholRangeComponent implements OnInit {
     return this.alcoholControlGroup.get('lesserAbvControl') as FormControl;
   }
   ngOnInit(): void {
-    console.log(this.abv_gt, this.abv_lt);
-
     if (this.abv_gt) {
       this.greaterAbvControl.setValue(this.abv_gt);
     }

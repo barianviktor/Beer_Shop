@@ -25,6 +25,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartItems$ = this.cartService.shoppingCart$.pipe(
       tap((cartItems: ICartItem[]) => {
         if (cartItems.length > 0) {
+          /* would get the first 15 item becouse api dont support contributor */
           this.youMightAlsoLikeBeers$ = this.beerService.youMightAlsoLikeBeers$(
             cartItems[0].item.contributed_by
           );

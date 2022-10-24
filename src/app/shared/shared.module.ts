@@ -20,12 +20,10 @@ import { CustomCheckboxInputComponent } from './components/inputs/custom-checkbo
 import { CustomSearchbarInputComponent } from './components/inputs/custom-searchbar-input/custom-searchbar-input.component';
 import { SearchItemCardComponent } from './components/cards/search-item-card/search-item-card.component';
 import { PercentOffBadgeComponent } from './components/badges/percent-off-badge/percent-off-badge.component';
-import { OnlyIconComponent } from './components/only-icon/only-icon.component';
 import { CustomSpinnerInputComponent } from './components/inputs/custom-spinner-input/custom-spinner-input.component';
 import { CheckoutCardComponent } from './components/cards/checkout-card/checkout-card.component';
 import { AddToCartCardComponent } from './components/cards/add-to-cart-card/add-to-cart-card.component';
 import { PriceCardComponent } from './components/cards/price-card/price-card.component';
-import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
 import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
 import { CustomPagingComponent } from './components/custom-paging/custom-paging.component';
 import { FilterPipe } from '../utils/pipes/filter.pipe';
@@ -52,12 +50,10 @@ import { NotificationBarComponent } from './components/notification-bar/notifica
     CustomSearchbarInputComponent,
     SearchItemCardComponent,
     PercentOffBadgeComponent,
-    OnlyIconComponent,
     CustomSpinnerInputComponent,
     CheckoutCardComponent,
     AddToCartCardComponent,
     PriceCardComponent,
-    CustomIconComponent,
     ItemCarouselComponent,
     CustomPagingComponent,
     FilterPipe,
@@ -90,7 +86,6 @@ import { NotificationBarComponent } from './components/notification-bar/notifica
     CheckoutCardComponent,
     AddToCartCardComponent,
     PriceCardComponent,
-    CustomIconComponent,
     ItemCarouselComponent,
     FilterPipe,
     SearchItemCardSkeltonComponent,

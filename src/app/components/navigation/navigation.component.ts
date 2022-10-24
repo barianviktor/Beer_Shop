@@ -1,10 +1,9 @@
-import { CartService } from './../../services/cart.service';
-import { ISavedBeer } from './../../interfaces/savedBeer.interface';
-import { Observable } from 'rxjs';
-import { WhislistService } from './../../services/whislist.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ICartItem } from 'src/app/interfaces/cartItem';
 import { SearchService } from 'src/app/services/search.service';
+import { CartService } from './../../services/cart.service';
+import { WhislistService } from './../../services/whislist.service';
 
 @Component({
   selector: 'app-navigation',
@@ -26,5 +25,4 @@ export class NavigationComponent implements OnInit {
     this.searchService.onHandleSearchName(search);
   }
   ngOnInit(): void {}
-  goTo(path: string) {}
 }

@@ -40,26 +40,12 @@ export class BeerService {
     searchParams: IBeerSearchParameters
   ): Observable<IBeer[]> {
     let query: any = {};
-    if (searchParams.beer_name) {
-      query.beer_name = searchParams.beer_name;
-    }
-    if (searchParams.per_page) {
-      query.per_page = searchParams.per_page;
-    }
-    if (searchParams.page) {
-      query.page = searchParams.page;
-    }
-    if (searchParams.hops) {
-      query.hops = searchParams.hops;
-    }
-    if (searchParams.malts) {
-      query.malt = searchParams.malts;
-    }
-    if (searchParams.abv_lt) {
-      query.abv_lt = searchParams.abv_lt;
-    }
-    if (searchParams.abv_gt) {
-      query.abv_gt = searchParams.abv_gt;
+    /* filtering falsy parameters */
+    for (const k in searchParams) {
+      /* console.log(searchParams[k as keyof IBeerSearchParameters]); */
+      if (searchParams[k as keyof IBeerSearchParameters]) {
+        query[k] = searchParams[k as keyof IBeerSearchParameters];
+      }
     }
 
     return this.http
@@ -82,16 +68,20 @@ export class BeerService {
 
   getBeersByIds$(ids: number[]): Observable<IBeer[]> {
     if (ids.length > 0) {
-      console.log(this.API + '?ids=' + ids.join('|'));
-
-      return this.http.get<IBeer[]>(this.API + '?ids=' + ids.join('|')).pipe(
-        map((beers: IBeer[]) => {
-          beers.forEach((beer: IBeer) => {
-            beer = this.giveBeerBonusCredentials(beer);
-          });
-          return beers;
+      return this.http
+        .get<IBeer[]>(this.API, {
+          params: {
+            ids: ids.join('|'),
+          },
         })
-      );
+        .pipe(
+          map((beers: IBeer[]) => {
+            beers.forEach((beer: IBeer) => {
+              beer = this.giveBeerBonusCredentials(beer);
+            });
+            return beers;
+          })
+        );
     } else {
       return of([]);
     }
@@ -119,6 +109,7 @@ export class BeerService {
   }
 
   youMightAlsoLikeBeers$(contributor: string): Observable<IBeer[]> {
+    /* cant filter for same contributor on api calls returns first 15 element from id 1 - 15 */
     return this.http
       .get<IBeer[]>(this.API, {
         params: {
@@ -141,6 +132,7 @@ export class BeerService {
   }
 
   giveBeerBonusCredentials(beer: IBeer): IBeer {
+    /* giving objects more personality */
     beer.badges = [];
     beer.onSale = 0;
     beer.content = 0;

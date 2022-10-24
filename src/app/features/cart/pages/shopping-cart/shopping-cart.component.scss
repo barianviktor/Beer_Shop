@@ -12,9 +12,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    h3{
 
-    }
 }
 :host{
     display: grid;
@@ -80,8 +78,8 @@ width: 100%;
 }
 .recently-viewed-items{
     width: 100%;
+    max-width: 900px;
     display: flex;
-    width: 90%;
     margin: auto;
     justify-content: space-around;
     margin: 16px auto;

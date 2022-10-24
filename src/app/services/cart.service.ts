@@ -7,8 +7,9 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class CartService {
+  /* would change the interface so that i would store only the id of the product and fetch the data on the go, didnt't had time to implement it */
   shoppingCart$ = new BehaviorSubject<ICartItem[]>([]);
-
+  /* some part needed an alert to update its formcontrols */
   cartIsUpdated$ = new Subject<void>();
   billingOptions = {
     vatPercent: 0.27,
@@ -18,13 +19,14 @@ export class CartService {
   constructor(private notificationService: NotificationService) {}
 
   addToCart(cartItem: ICartItem): void {
+    /* if is in the cart increment if not pushing it */
     let list = this.shoppingCart$.getValue();
     if (this.isInTheList(cartItem.item.id)) {
       this.increaseQuantity(cartItem.item.id, cartItem.quantity);
     } else {
       list.push(cartItem);
     }
-
+    /* to the notification subject */
     this.notificationService.successNotification(
       'You added ' + cartItem.item.name + ' in ',
       {
@@ -56,7 +58,8 @@ export class CartService {
     let list = this.shoppingCart$.getValue();
     let beer = list.find((cartItem: ICartItem) => cartItem.item.id == id);
     if (beer) {
-      beer.quantity = beer.quantity + quantity;
+      beer.quantity =
+        parseInt(beer.quantity.toString()) + parseInt(quantity.toString());
       this.shoppingCart$.next(list);
       this.cartIsUpdated$.next();
     }

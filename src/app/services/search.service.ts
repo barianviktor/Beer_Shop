@@ -34,8 +34,7 @@ export class SearchService {
     'dark_crystal',
     'amber',
   ];
-  /*  scrollIsActive: boolean = true;
-  currentlyFetching: boolean = true; */
+
   scrollIsDisabled$ = new BehaviorSubject<boolean>(false);
   currentlyFetching$ = new BehaviorSubject<boolean>(true);
   constructor(private beerService: BeerService) {}
@@ -48,7 +47,6 @@ export class SearchService {
       .getBeersbySearchParameters$(this.searchParameters)
       .pipe(delay(3000))
       .subscribe((beers: IBeer[]) => {
-        console.log(beers.length);
         if (beers.length < this.searchParameters.per_page) {
           this.scrollIsDisabled$.next(true);
         }
@@ -81,7 +79,6 @@ export class SearchService {
     } else {
       this.searchParameters.malts = item;
     }
-    console.log(item);
 
     this.getBeersBySearchParameters();
   }
@@ -90,13 +87,13 @@ export class SearchService {
     abv_gt: number | undefined;
     abv_lt: number | undefined;
   }): void {
-    this.newFilterAdded();
     if (range.abv_gt) {
       this.searchParameters.abv_gt = range.abv_gt;
     }
     if (range.abv_lt) {
       this.searchParameters.abv_lt = range.abv_lt;
     }
+    this.newFilterAdded();
     this.getBeersBySearchParameters();
   }
   onHandleNextPage(): void {

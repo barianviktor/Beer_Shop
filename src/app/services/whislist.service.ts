@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class WhislistService {
-  whistlist$ = new BehaviorSubject<number[]>([2, 56, 1, 3, 78]);
+  whistlist$ = new BehaviorSubject<number[]>([]);
   constructor(private notificationService: NotificationService) {}
   addToList(id: number): void {
     let list = this.whistlist$.getValue();

@@ -32,6 +32,7 @@ export class BeerDetailComponent implements OnInit {
       }),
       delay(1000),
       tap((beer: IBeer) => {
+        /* adding to recentlyitems subject */
         this.recentItemsService.addNewRecentItem(beer.id);
         this.customersAlsoBought$ = this.beerService.getCustomersAlsoBought$(
           parseFloat(beer.abv)
