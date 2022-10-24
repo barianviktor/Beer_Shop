@@ -1,4 +1,7 @@
 <ng-container *ngIf="cartItems$ | async as cartItems">
+  <div class="notification-bar-container">
+    <app-notification-bar></app-notification-bar>
+  </div>
   <h1>Shopping Cart</h1>
   <div *ngIf="cartItems.length > 0; else emptyCart" class="cart">
     <div class="cart-items-container">
@@ -13,8 +16,6 @@
         <app-cart-item
           *ngIf="cartItem"
           [cartItem]="cartItem"
-          (increaseQuantity)="onIncrementQuantity($event)"
-          (decreaseQuantity)="onDecrementQuantity($event)"
           (removeItem)="onRemoveItem(cartItem.item.id)"
           (whislistEmitter)="onWhislistEmitter(cartItem.item.id)"
           [favorited]="isInWhislist(cartItem.item.id)"
@@ -33,9 +34,11 @@
   </div>
   <div class="hooks">
     <ng-template #emptyCart>
-      <p>Your cart is empty.</p>
-      <p>Start adding items to your cart.</p>
-      <a [routerLink]="['/']" class="link">Store</a>
+      <div class="empty-cart-container">
+        <strong>Your cart is empty.</strong>
+        <p>Start adding items to your cart.</p>
+        <a [routerLink]="['/beer']" class="link">Store</a>
+      </div>
     </ng-template>
     <div
       *ngIf="youMightAlsoLikeBeers$ | async as items"

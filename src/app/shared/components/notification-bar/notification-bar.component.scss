@@ -1,7 +1,10 @@
-@use "../../../assets/styles/" as *;
+@use "../../../../assets/styles/" as *;
 
 .notification-container{
-    min-height: 50px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    margin: 8px 0 ;
 }
 .notification{
     width: 100%;
@@ -16,8 +19,14 @@
 }
 .success{
     background-color: $functional-success-green2;
+   
 }
 .failure {
     background-color: $functional-warning-error;
     color: white;
+    img{
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(124deg) brightness(106%) contrast(107%);
+
+
+    }
 }

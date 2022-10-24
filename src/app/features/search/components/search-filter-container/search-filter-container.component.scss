@@ -1,7 +1,7 @@
 @use '../../../../../assets/styles/' as *;
 .filter-container{
-    overflow: hidden;
     height: fit-content;
+    padding-left: 16px;
 }
 .open{
     max-height: 1000px;

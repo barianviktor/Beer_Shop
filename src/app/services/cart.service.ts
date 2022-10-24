@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { IBeerSearchCard } from '../interfaces/beer-search-card.interface';
+import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { ICartItem } from '../interfaces/cartItem';
-import { IBeer } from './../interfaces/beer.interface';
-import { ISavedBeer } from './../interfaces/savedBeer.interface';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -11,6 +8,8 @@ import { NotificationService } from './notification.service';
 })
 export class CartService {
   shoppingCart$ = new BehaviorSubject<ICartItem[]>([]);
+
+  cartIsUpdated$ = new Subject<void>();
   billingOptions = {
     vatPercent: 0.27,
     shippingCost: 10,
@@ -30,11 +29,11 @@ export class CartService {
       'You added ' + cartItem.item.name + ' in ',
       {
         message: 'your cart',
-        linkTo: 'shopping-cart',
+        linkTo: ['/shopping-cart'],
       }
     );
-
     this.shoppingCart$.next(list);
+    this.cartIsUpdated$.next();
   }
   removeFromCart(id: number): void {
     let list = this.shoppingCart$.getValue();
@@ -43,6 +42,7 @@ export class CartService {
       1
     );
     this.shoppingCart$.next(list);
+    this.cartIsUpdated$.next();
   }
   isInTheList(id: number): boolean {
     let list = this.shoppingCart$.getValue();
@@ -58,6 +58,7 @@ export class CartService {
     if (beer) {
       beer.quantity = beer.quantity + quantity;
       this.shoppingCart$.next(list);
+      this.cartIsUpdated$.next();
     }
   }
   decreaseQuantity(id: number, quantity: number = 1): void {
@@ -67,6 +68,7 @@ export class CartService {
       if (beer.quantity - quantity > 0) {
         beer.quantity = beer.quantity - quantity;
         this.shoppingCart$.next(list);
+        this.cartIsUpdated$.next();
       } else {
         this.removeFromCart(id);
       }

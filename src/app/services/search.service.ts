@@ -36,29 +36,28 @@ export class SearchService {
   ];
   /*  scrollIsActive: boolean = true;
   currentlyFetching: boolean = true; */
-  scrollIsActive$ = new BehaviorSubject<boolean>(true);
+  scrollIsDisabled$ = new BehaviorSubject<boolean>(false);
   currentlyFetching$ = new BehaviorSubject<boolean>(true);
   constructor(private beerService: BeerService) {}
   getBeersBySearchParameters(): void {
     this.currentlyFetching$.next(true);
-    console.log('fetching', this.currentlyFetching$.getValue());
-
-    console.log('scrollingisactive', this.scrollIsActive$.getValue());
+    if (this.searchParameters.page == 1) {
+      this.beers$.next([]);
+    }
     this.beerService
       .getBeersbySearchParameters$(this.searchParameters)
       .pipe(delay(3000))
       .subscribe((beers: IBeer[]) => {
+        console.log(beers.length);
+        if (beers.length < this.searchParameters.per_page) {
+          this.scrollIsDisabled$.next(true);
+        }
         if (this.searchParameters.page > 1) {
           beers = this.beers$.getValue().concat(beers);
         }
-        if (beers.length < this.searchParameters.per_page) {
-          this.scrollIsActive$.next(false);
-        }
+
         this.beers$.next(beers);
         this.currentlyFetching$.next(false);
-        console.log('fetching', this.currentlyFetching$.getValue());
-
-        console.log('scrollingisactive', this.scrollIsActive$.getValue());
       });
   }
   onHandleSearchName(beer_name: string): void {
@@ -110,10 +109,12 @@ export class SearchService {
     this.searchParameters.beer_name = undefined;
     this.searchParameters.abv_gt = undefined;
     this.searchParameters.abv_lt = undefined;
+    this.scrollIsDisabled$.next(false);
+
     this.getBeersBySearchParameters();
   }
   newFilterAdded(): void {
     this.searchParameters.page = 1;
-    this.scrollIsActive$.next(true);
+    this.scrollIsDisabled$.next(false);
   }
 }

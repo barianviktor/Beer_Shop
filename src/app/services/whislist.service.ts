@@ -13,7 +13,7 @@ export class WhislistService {
     list.push(id);
     this.whistlist$.next(list);
     this.notificationService.successNotification('Item added to whislist', {
-      linkTo: '/whislist',
+      linkTo: ['/whislist'],
       message: 'Go to whislist',
     });
   }
@@ -27,7 +27,7 @@ export class WhislistService {
     );
     this.whistlist$.next(list);
     this.notificationService.failureNotification('Item removed from whislist', {
-      linkTo: '/whislist',
+      linkTo: ['/whislist'],
       message: 'Go to whislist',
     });
   }

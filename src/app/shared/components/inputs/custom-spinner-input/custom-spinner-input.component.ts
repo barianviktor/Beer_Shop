@@ -8,11 +8,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CustomSpinnerInputComponent implements OnInit {
   /*   @Input() control: FormControl = new FormControl(1, { nonNullable: true });
-   */ @Input() width: string = '100%';
-  @Input() value: number = 1;
+   */
+  @Input() width: string = '100%';
+  @Input() control!: FormControl;
   @Output() incrementEmit: EventEmitter<void> = new EventEmitter();
   @Output() decrementEmit: EventEmitter<void> = new EventEmitter();
-  @Output() changeEmit: EventEmitter<number> = new EventEmitter();
+  @Output() changeEmit: EventEmitter<void> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
@@ -22,7 +23,7 @@ export class CustomSpinnerInputComponent implements OnInit {
   onDecrementClick() {
     this.decrementEmit.emit();
   }
-  onChangedValue(event: any) {
-    this.changeEmit.emit(event.target.value);
+  onChangedValue() {
+    this.changeEmit.emit();
   }
 }

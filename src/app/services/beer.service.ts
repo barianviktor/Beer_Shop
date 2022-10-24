@@ -11,7 +11,31 @@ import { IBeer } from './../interfaces/beer.interface';
 export class BeerService {
   API = environment.api + '/beers';
   constructor(private http: HttpClient) {}
-
+  getCustomersAlsoBought$(abv: number) {
+    /* the api was not suited for searching by contributors
+    so is searched for the same abv 
+    */
+    return this.http
+      .get<IBeer[]>(this.API, {
+        params: {
+          abv_gt: (abv - 0.05).toString(),
+          abv_lt: (abv + 0.05).toString(),
+          per_page: '15',
+        },
+      })
+      .pipe(
+        map((beers: IBeer[]) => {
+          if (beers) {
+            beers.forEach((beer: IBeer) => {
+              beer = this.giveBeerBonusCredentials(beer);
+            });
+            return beers;
+          } else {
+            return [];
+          }
+        })
+      );
+  }
   getBeersbySearchParameters$(
     searchParams: IBeerSearchParameters
   ): Observable<IBeer[]> {

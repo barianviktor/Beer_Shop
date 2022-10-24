@@ -1,6 +1,18 @@
-<div *ngIf="beer$ | async as beer">
+<div *ngIf="beer$ | async as beer; else elseBlock">
+  <div class="breadcrumbs-container">
+    <app-breadcrumbs [linkTo]="['/']"></app-breadcrumbs>
+    <app-breadcrumbs
+      [linkTo]="['/beer']"
+      [text]="'All Beers'"
+    ></app-breadcrumbs>
+    <app-breadcrumbs
+      [linkTo]="['/beer', beer.id.toString()]"
+      [text]="beer.name"
+      [showIcon]="false"
+    ></app-breadcrumbs>
+  </div>
   <div class="item-container">
-    <div class="details-contianer">
+    <div class="details-container">
       <div class="image-container">
         <div class="button-container">
           <app-icon-only-button></app-icon-only-button>
@@ -35,16 +47,17 @@
               [onSale]="beer.onSale"
             ></app-price-card>
             <p class="shiping-cost">
-              Plus <a [routerLink]="['']">Shipping costs</a>
+              Plus <a class="link" [routerLink]="['']">Shipping costs</a>
             </p>
           </div>
         </div>
       </section>
     </div>
     <app-add-to-cart-card
+      *ngIf="beer.price"
       [price]="beer.price"
       [onSale]="beer.onSale"
-      (addToCart)="onHandleCart(beer, $event)"
+      (addToCart)="handleAddToCart(beer, $event)"
     ></app-add-to-cart-card>
   </div>
   <div class="facts-container">
@@ -66,4 +79,14 @@
       <div class="item_content">{{ beer.first_brewed }}</div>
     </div>
   </div>
+  <div
+    class="customers-also-bought-container"
+    *ngIf="customersAlsoBought$ | async as customersAlsoBought"
+  >
+    <p class="title">Customers Also Bought</p>
+    <app-item-carousel [items]="customersAlsoBought"></app-item-carousel>
+  </div>
 </div>
+<ng-template #elseBlock>
+  <app-beer-detail-skelton></app-beer-detail-skelton>
+</ng-template>

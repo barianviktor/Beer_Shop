@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'beer',
     pathMatch: 'full',
     loadChildren: () =>
       import('./features/search/search.module').then((m) => m.SearchModule),
@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/',
+    redirectTo: '/beer',
   },
 ];
 

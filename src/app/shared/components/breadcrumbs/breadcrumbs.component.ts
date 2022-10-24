@@ -9,6 +9,7 @@ export class BreadcrumbsComponent implements OnInit {
   @Input() text: string = 'Home';
   @Input() icon_path: string = 'assets/icons/nav-arrow-right-side.svg';
   @Input() linkTo: string[] = [''];
+  @Input() showIcon: boolean = true;
   constructor() {}
 
   ngOnInit(): void {}

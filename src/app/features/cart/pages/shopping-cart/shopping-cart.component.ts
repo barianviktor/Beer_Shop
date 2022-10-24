@@ -40,15 +40,10 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onDecrementQuantity(id: number) {
-    this.cartService.decreaseQuantity(id);
-  }
-  onIncrementQuantity(id: number) {
-    this.cartService.increaseQuantity(id);
-  }
   onRemoveItem(id: number) {
     this.cartService.removeFromCart(id);
   }
+
   getTotalCost(): number {
     return this.cartService.getTotalCost();
   }

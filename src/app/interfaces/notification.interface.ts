@@ -3,6 +3,6 @@ export interface INotification {
   message: string;
   link?: {
     message: string;
-    linkTo: string;
+    linkTo: string[];
   };
 }

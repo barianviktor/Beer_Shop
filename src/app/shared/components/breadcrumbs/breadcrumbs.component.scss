@@ -2,15 +2,19 @@
 
 a{
     @include inline-flex-everything-centered;
+    width: fit-content;
     color: $greyscale-black;
     cursor: pointer;
     height: 28px;
     border: 2px solid $greyscale-white;
-    outline: none
+    outline: none;
+    text-decoration: none;
+
 }
+
 p{
     @include text-caption;
-
+    white-space: nowrap;
     margin-right: 4px;
 }
 a:active p{

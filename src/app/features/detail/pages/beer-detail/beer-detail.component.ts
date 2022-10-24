@@ -1,4 +1,4 @@
-import { catchError, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap, delay } from 'rxjs';
 import { BeerService } from './../../../../services/beer.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { RecentItemsService } from 'src/app/services/recent-items.service';
 })
 export class BeerDetailComponent implements OnInit {
   beer$: Observable<IBeer>;
+  customersAlsoBought$?: Observable<IBeer[]>;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -29,7 +30,13 @@ export class BeerDetailComponent implements OnInit {
         this.router.navigate(['/']);
         throw err;
       }),
-      tap((beer: IBeer) => this.recentItemsService.addNewRecentItem(beer.id))
+      delay(1000),
+      tap((beer: IBeer) => {
+        this.recentItemsService.addNewRecentItem(beer.id);
+        this.customersAlsoBought$ = this.beerService.getCustomersAlsoBought$(
+          parseFloat(beer.abv)
+        );
+      })
     );
   }
   onHandleFavorite(id: number) {
@@ -38,11 +45,10 @@ export class BeerDetailComponent implements OnInit {
   isInWhislist(id: number): boolean {
     return this.whislistService.isInTheList(id);
   }
-  onHandleCart(beer: IBeer, quantity: number) {
-    console.log(quantity);
+  handleAddToCart(item: IBeer, quantity: number) {
     let cartItem: ICartItem = {
-      item: beer,
       quantity: quantity,
+      item: item,
     };
     this.cartService.addToCart(cartItem);
   }
@@ -62,6 +68,6 @@ export class BeerDetailComponent implements OnInit {
     if (!listed_ingredients.includes(ingredients.yeast)) {
       listed_ingredients.push(ingredients.yeast);
     }
-    return listed_ingredients.join(' ');
+    return listed_ingredients.join(', ');
   }
 }

@@ -12,7 +12,7 @@ export class NotificationService {
     message: string,
     link?: {
       message: string;
-      linkTo: string;
+      linkTo: string[];
     }
   ) {
     let notification: INotification = {
@@ -26,7 +26,7 @@ export class NotificationService {
     message: string,
     link?: {
       message: string;
-      linkTo: string;
+      linkTo: string[];
     }
   ) {
     let notification: INotification = {

@@ -40,9 +40,10 @@
     </div>
     <div class="quantity-container">
       <app-custom-spinner-input
-        [value]="cartItem.quantity"
+        [control]="quantity"
         (decrementEmit)="onDecrementClick()"
         (incrementEmit)="onIncrementClick()"
+        (changeEmit)="onQuantityChange()"
       ></app-custom-spinner-input>
     </div>
     <div class="subtotal-container">

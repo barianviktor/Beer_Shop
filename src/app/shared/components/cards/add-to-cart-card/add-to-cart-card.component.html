@@ -4,7 +4,7 @@
 
     <h4>Total</h4>
     <div class="price-container">
-      <ng-container *ngIf="price">
+      <!-- <ng-container *ngIf="price">
         <ng-container *ngIf="onSale; else elseblock">
           <div>
             <h2>
@@ -17,20 +17,23 @@
         <ng-template #elseblock>
           <h2>{{ price * quantity | currency: "EUR" }}</h2>
         </ng-template>
-      </ng-container>
+      </ng-container> -->
+      <app-price-card [price]="price" [onSale]="onSale"></app-price-card>
     </div>
     <p>
       prices incl. VAT plus
       <a class="text-standard-link" [routerLink]="['/']">shipping costs</a>
     </p>
   </div>
-  <div class="card-actions">
+  <form [formGroup]="cartFormGroup" class="card-actions">
     <div class="controls-container">
+      <!--         [value]="quantity"
+ -->
       <app-custom-spinner-input
-        [value]="quantity"
         (decrementEmit)="decrement()"
         (incrementEmit)="increment()"
-        (changeEmit)="onChanged($event)"
+        (changeEmit)="onChanged()"
+        [control]="quantity"
       ></app-custom-spinner-input>
     </div>
     <div class="controls-container">
@@ -40,5 +43,5 @@
       ></app-primary-button>
     </div>
     <!--   -->
-  </div>
+  </form>
 </div>

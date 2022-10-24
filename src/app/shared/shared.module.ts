@@ -30,7 +30,8 @@ import { ItemCarouselComponent } from './components/item-carousel/item-carousel.
 import { CustomPagingComponent } from './components/custom-paging/custom-paging.component';
 import { FilterPipe } from '../utils/pipes/filter.pipe';
 import { SearchItemCardSkeltonComponent } from './components/cards/search-item-card-skelton/search-item-card-skelton.component';
-import { SkeltonItemComponent } from './skelton-item/skelton-item.component';
+import { SkeltonItemComponent } from './components/skelton-item/skelton-item.component';
+import { NotificationBarComponent } from './components/notification-bar/notification-bar.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SkeltonItemComponent } from './skelton-item/skelton-item.component';
     FilterPipe,
     SearchItemCardSkeltonComponent,
     SkeltonItemComponent,
+    NotificationBarComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -92,6 +94,8 @@ import { SkeltonItemComponent } from './skelton-item/skelton-item.component';
     ItemCarouselComponent,
     FilterPipe,
     SearchItemCardSkeltonComponent,
+    SkeltonItemComponent,
+    NotificationBarComponent,
   ],
 })
 export class SharedModule {}

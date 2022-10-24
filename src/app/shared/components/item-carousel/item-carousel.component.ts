@@ -1,8 +1,8 @@
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { WhislistService } from './../../../services/whislist.service';
-import { ICartItem } from './../../../interfaces/cartItem';
 import { IBeer } from './../../../interfaces/beer.interface';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ICartItem } from './../../../interfaces/cartItem';
+import { WhislistService } from './../../../services/whislist.service';
 
 @Component({
   selector: 'app-item-carousel',
@@ -13,8 +13,7 @@ export class ItemCarouselComponent implements OnInit {
   @Input() items: IBeer[] = [];
   currentStepValue = 0;
   stepValue = 3;
-  @Output() whislistEmitter = new EventEmitter<number>();
-  @Output() cartEmitter = new EventEmitter<ICartItem>();
+
   ngOnInit(): void {}
 
   constructor(

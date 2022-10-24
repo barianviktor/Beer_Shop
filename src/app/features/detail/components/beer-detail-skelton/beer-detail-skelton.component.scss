@@ -1,20 +1,9 @@
 @use "../../../../../assets/styles/" as *;
-.customers-also-bought-container{
-    margin: 48px auto;
-    width: 100%;
-    .title{
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 32px;
-        color: $greyscale-dark-grey;
-        text-align: center;
-    }
-}
-.breadcrumbs-container{
+.breadcrumb-container{
     display: flex;
     align-items: center;
-   padding: 16px 0;
-   grid-column: 1/5;
+    padding: 16px 0;
+    grid-column: 1/13;
 }
 .item-container{
     display: grid;
@@ -31,44 +20,34 @@
     width: 100%;
     position: relative;
     @include inline-flex-everything-centered;
-    img{
-        height: 80%;
-    }
+
 }
 .details{
     width: 100%;
     margin: 0 25px;
-  .detail-tagline{
-    margin: 16px 0;
-  }
+
 }
+
 .detail-header{
     display: flex;
     justify-content: space-between;
-    p{
-        color: $greyscale-dark-grey;
-    }
+    width: 100%;
     margin-bottom: 16px ;
+    .name-tagline{
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
-.detail-price {
-    max-width: 300px;
 
-    margin: 16px 0;
-   .shipping-cost{
-    color: $greyscale-dark-grey;
-    @include text-caption;
-   }
-}
-.button-container{
+.detail-main{
     display: flex;
-    position: absolute;
-    top:0;
-    right: 0;
-    padding: 10px;
-    
+    flex-direction: column;
+    gap: 16px;
 }
 .facts-container{
-    margin: 48px 0;
+    margin: 32px 0;
     display: flex;
     gap: 32px;
     flex-direction: column;
@@ -80,9 +59,6 @@
         padding: 20px 0;
         gap: 40px;
         border-bottom: 1px solid $greyscale-grey;
-        .item_name{
-            color: $greyscale-dark-grey;
-            @include text-bold;
-        }
+
     }
 }
