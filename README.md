@@ -1,27 +1,19 @@
-# BeerShop
+As the usual npm i to install all the missing dependencies;
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
+I created some skelton 💀 loading items when the application loads for better user experience, so here and there i added additional delays to the http calls.
 
-## Development server
+I tried implementing Darias Design, and created many small components, unfortionetly didn't have time left to implement mobile compatibility.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+I wrote some tests for the services but could do more in the future.
 
-## Code scaffolding
+I tried programing as reactivly as i could and only manually subscribe where there was no way to use the async pipe.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Since there was no way to filter the api by styles and methods i used the hops and malts.
 
-## Build
+Since you could not filter the beers by contributor i modified the request
+-one time you need to filter only by contributor, i created the http call but it returns a default [beer1, beer2,beer3...] object and i used that.
+-one time you need to filter by contributor and by abv percentage, i created the right http call but it only filters by abv percentage.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+I made separate modules for each use case of the website and a shared module for commonly used components.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+In the future i would give more thought about what component needs to be a Smart Component and what needs to be a Presentational Component
