@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICartItem } from 'src/app/interfaces/cartItem';
@@ -16,12 +17,14 @@ export class NavigationComponent implements OnInit {
   constructor(
     private whislistService: WhislistService,
     private cartService: CartService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private router: Router
   ) {
     this.whisList$ = this.whislistService.whistlist$;
     this.cart$ = this.cartService.shoppingCart$;
   }
   onSearch(search: string): void {
+    this.router.navigate(['/beer']);
     this.searchService.onHandleSearchName(search);
   }
   ngOnInit(): void {}
